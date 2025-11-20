@@ -23,7 +23,6 @@ D ITMFND          S              1A
              If  %Found;
                  Update INVITEMR;
              Else;
-                 // If not found, add a new record
                  Write INVITEMR;
              EndIf;
 
