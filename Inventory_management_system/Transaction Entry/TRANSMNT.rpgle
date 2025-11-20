@@ -27,6 +27,7 @@ dow not *in03;
       T.ITEMID=''; T.TRANS_TYPE=''; T.QTY=0;
       T.LOCATION=''; T.REFNO='';
     else;
+      T.LOCATION=''; T.REFNO='';
       // Error will be seen in joblog; add SNDPGMMSG if needed
     endif;
   endif;
