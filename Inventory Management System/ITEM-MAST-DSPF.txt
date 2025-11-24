@@ -1,0 +1,32 @@
+A                                      DSPSIZ(24 80 *DS3)
+     A                                      INDARA
+
+     A          R ITEMSCRN
+     A                                      CF03(03)
+     A                                      CF05(05)
+     A                                      CF06(06)
+     A                                      CF12(12)
+
+     A                                      BOX(2 2 21 78 *D)
+
+     A                                  3 30'Item Maintenance'
+     A                                      DSPATR(HI)
+
+     A            ITEMID        5S 0B  6 15
+     A                                      DSPATR(UL)
+     A                                  6 10'Item ID:'
+
+     A            ITEMNAME     30A   B  8 15
+     A                                  8 10'Name:'
+
+     A            UOM           3A   B 10 15
+     A                                 10 10'UOM:'
+
+     A            PRICE         9S 2B 12 15
+     A                                 12 10'Price:'
+
+     A            QTYONHAND     9S 0B 14 15
+     A                                 14 10'Qty On Hand:'
+
+     A                                  17 10'F5=Add  F6=Change  F12=Delete'
+

@@ -1,0 +1,25 @@
+ A                                      DSPSIZ(24 80 *DS3)
+A                                      PRINT
+A                                      INDARA
+A          R MENUSCRN
+A                                      CF03(03)
+A                                      CSRLOC(&CSRROW &CSRCOL)
+
+A                                      BOX(2 2 21 78 *D)
+
+A            TITLE        20A  O  2 27 VALUE('INVENTORY MANAGEMENT')
+A                                      DSPATR(HI)
+
+A                                  5 10'1 - ITEM MAINTENANCE'
+A                                  7 10'2 - STOCK BY LOCATION'
+A                                  9 10'3 - TRANSACTION POSTING'
+A                                 11 10'4 - REPORTS'
+A                                 13 10'5 - EXIT'
+
+A            OPTION        1A  B 17 10
+A                                      CHECK(MF)
+A                                      DSPATR(UL)
+
+A            CSRROW        3S 0H
+A            CSRCOL        3S 0H
+

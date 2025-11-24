@@ -1,0 +1,9 @@
+     A          R TRNDET                    TEXT('Transaction Detail')
+     A            TRNID        7S 0         COLHDG('Transaction ID')
+     A            ITEMID       5S 0         COLHDG('Item ID')
+     A            LOCID        5A           COLHDG('Location')
+     A            QTY          9S 0         COLHDG('Quantity')
+
+     A          K TRNID
+     A          K ITEMID
+     A          K LOCID

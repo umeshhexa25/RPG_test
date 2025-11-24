@@ -1,0 +1,7 @@
+A          R STKREC                     TEXT('Stock By Location')
+     A            ITEMID        5S 0         COLHDG('Item ID')
+     A            LOCID         5A           COLHDG('Location ID')
+     A            QTY           9S 0         COLHDG('Quantity')
+
+     A          K ITEMID
+     A          K LOCID

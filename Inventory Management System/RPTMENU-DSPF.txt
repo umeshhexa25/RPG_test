@@ -1,0 +1,19 @@
+A                                      DSPSIZ(24 80 *DS3)
+     A                                      INDARA
+
+     A          R RPTSCR
+     A                                      CF03(03)
+
+     A                                      BOX(2 2 21 78 *D)
+
+     A                                  3 30'Reports Menu'
+     A                                      DSPATR(HI)
+
+     A                                  6 10'1 - Item Master List'
+     A                                  8 10'2 - Stock By Location'
+     A                                 10 10'3 - Transaction Register'
+     A                                 12 10'4 - Exit'
+
+     A                                 16 10'Enter Option:'
+     A            OPTION        1A  B 16 25 DSPATR(UL)
+

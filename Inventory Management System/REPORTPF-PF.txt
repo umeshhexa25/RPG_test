@@ -1,0 +1,12 @@
+     A                                      SPACEA(1)
+     A          R HDR1                      TEXT('Report Header')
+     A                                      SKIPB(1)
+     A            HDS1         50A          2
+     A                                      SKIPA
+
+     A          R DTL1                      TEXT('Detail Line')
+     A            FLD1        10A
+     A            FLD2        30A
+     A            FLD3        10A
+     A            FLD4        10A
+     A                                      SPACEA(1)

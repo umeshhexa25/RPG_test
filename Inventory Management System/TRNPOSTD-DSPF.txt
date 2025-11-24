@@ -1,0 +1,30 @@
+A                                      DSPSIZ(24 80 *DS3)
+     A                                      INDARA
+
+     A          R POSTSCRN
+     A                                      CF03(03)
+     A                                      CF05(05)
+
+     A                                      BOX(2 2 21 78 *D)
+
+     A                                  3 28'Transaction Posting'
+     A                                      DSPATR(HI)
+
+     A                                  6 10'Transaction ID:'
+     A            TRNID        7S 0B  6 28 DSPATR(UL)
+
+     A                                  8 10'Type (I/R/A):'
+     A            TRNTYPE      1A   B  8 28
+
+     A                                 10 10'Item ID:'
+     A            ITEMID        5S 0B 10 28 DSPATR(UL)
+
+     A                                 12 10'Location:'
+     A            LOCID         5A   B 12 28 DSPATR(UL)
+
+     A                                 14 10'Quantity:'
+     A            QTY           9S 0B 14 28
+
+     A                                  18 10'F5=Post Transaction'
+
+

@@ -1,0 +1,14 @@
+A          R LOCARECR                    TEXT('Stock by Location Record')
+
+A            ITEMID        10A          COLHDG('Item ID')
+A                                      CHECK(NE ' ')
+A                                      ALWNULL(*NO)
+
+A            LOCID          5A          COLHDG('Location ID')
+A                                      CHECK(NE ' ')
+A                                      ALWNULL(*NO)
+
+A            QTYONHAND      7P 0        COLHDG('Quantity On Hand')
+
+A          K ITEMID
+A          K LOCID

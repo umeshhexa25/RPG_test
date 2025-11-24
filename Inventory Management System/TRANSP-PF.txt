@@ -1,0 +1,16 @@
+A          R TRANSREC                   TEXT('Transactions')
+
+A            TRNID         9P 0         COLHDG('Trans ID')
+A                                      UNIQUE
+
+A            ITEMID        10A          COLHDG('Item ID')
+
+A            LOCID          5A          COLHDG('Loc ID')
+
+A            TRNTYPE        1A          COLHDG('Type I/R')
+
+A            QTY            7P 0        COLHDG('Quantity')
+
+A            TRNDATE         L          COLHDG('Date')
+
+A          K TRNID

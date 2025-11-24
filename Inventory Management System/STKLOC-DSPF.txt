@@ -1,0 +1,25 @@
+A                                      DSPSIZ(24 80 *DS3)
+     A                                      INDARA
+
+     A          R STKSCREEN
+     A                                      CF03(03)
+     A                                      CF05(05)
+     A                                      CF06(06)
+     A                                      CF12(12)
+
+     A                                      BOX(2 2 21 78 *D)
+
+     A                                  3 28'Stock By Location'
+     A                                      DSPATR(HI)
+
+     A                                  6 10'Item ID:'
+     A            ITEMID        5S 0B  6 20 DSPATR(UL)
+
+     A                                  8 10'Location:'
+     A            LOCID         5A   B  8 20 DSPATR(UL)
+
+     A                                 10 10'Quantity:'
+     A            QTY           9S 0B 10 20
+
+     A                                 17 10'F5=Add  F6=Change  F12=Delete'
+

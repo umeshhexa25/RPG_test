@@ -1,0 +1,8 @@
+A          R ITEMREC                    TEXT('Item Master File')
+     A            ITEMID        5S 0         COLHDG('Item' 'ID')
+     A            ITEMNAME     30A           COLHDG('Item' 'Name')
+     A            UOM           3A           COLHDG('Unit' 'Of' 'Measure')
+     A            PRICE         9S 2         COLHDG('Unit' 'Price')
+     A            QTYONHAND     9S 0         COLHDG('Qty' 'On Hand')
+
+     A          K ITEMID

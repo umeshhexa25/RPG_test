@@ -1,0 +1,8 @@
+     A          R TRNHDR                     TEXT('Transaction Header')
+     A            TRNID        7S 0          COLHDG('Transaction ID')
+     A            TRNDATE      L             COLHDG('Date')
+     A            TRNTYPE      1A            COLHDG('Type')
+     A                                      VALUES('I' 'R' 'A')
+     A                                      TEXT('I=Issue R=Receive A=Adjustment')
+
+     A          K TRNID
