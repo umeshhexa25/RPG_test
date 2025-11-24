@@ -9,7 +9,6 @@ D HDS1          S             50A
    HDS1 = 'ITEM MASTER LIST';
    EXCPT HDR1;
 
-   SETLL *START ITEMS;
    READ ITEMS;
 
    DOU %EOF(ITEMS);
