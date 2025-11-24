@@ -3,19 +3,19 @@ F* STOCK BY LOCATION MAINTENANCE
 F*******************************************************
 FSTKLOCD  CF   E             WORKSTN
 FSTKLOC   UF A E           K DISK
-
+ 
 D ITEMID        S              5  0
 D LOCID         S              5
 D QTY           S              9  0
-
- /FREE
+ 
+/FREE
    *INLR = *OFF;
    EXSR $INIT;
-
+ 
    DOU *IN03 = *ON;
-
+ 
       EXFMT STKSCREEN;
-
+ 
       IF *IN05 = *ON;
          EXSR $ADD;
       ELSEIF *IN06 = *ON;
@@ -25,56 +25,53 @@ D QTY           S              9  0
       ELSE;
          EXSR $LOAD;
       ENDIF;
-
+ 
    ENDDO;
-
+ 
    *INLR = *ON;
    RETURN;
- /END-FREE
-
+/END-FREE
+ 
 C*******************************************************
-C* $INIT — Clear variables
+C* $INIT Clear variables
 C*******************************************************
 C     $INIT         BEGSR
 C                   Z-ADD0        ITEMID
 C                   MOVE *BLANK   LOCID
 C                   Z-ADD0        QTY
 C                   ENDSR
-
+ 
 C*******************************************************
-C* $LOAD — Load existing item/location
+C* $LOAD Load existing item/location
 C*******************************************************
 C     $LOAD         BEGSR
-C                   CHAINITEMID:LOCID  STKREC
 C                   IF %FOUND(STKLOC)
 C                   MOVE QTY           QTY
 C                   ENDIF
 C                   ENDSR
-
+ 
 C*******************************************************
-C* $ADD — Add New Stock Record
+C* $ADD Add New Stock Record
 C*******************************************************
 C     $ADD          BEGSR
 C                   MOVELQTY          QTY
 C                   WRITE STKREC
 C                   ENDSR
-
+ 
 C*******************************************************
-C* $CHG — Update Existing Stock
+C* $CHG Update Existing Stock
 C*******************************************************
 C     $CHG          BEGSR
-C                   CHAINITEMID:LOCID  STKREC
 C                   IF %FOUND
 C                   MOVELQTY           QTY
 C                   UPDATESTKREC
 C                   ENDIF
 C                   ENDSR
-
+ 
 C*******************************************************
-C* $DEL — Delete Stock Record
+C* $DEL Delete Stock Record
 C*******************************************************
 C     $DEL          BEGSR
-C                   CHAINITEMID:LOCID  STKREC
 C                   IF %FOUND
 C                   DELETESTKREC
 C                   ENDIF
