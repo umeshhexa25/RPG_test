@@ -10,7 +10,6 @@ D HDS1          S             50A
    HDS1 = 'TRANSACTION REGISTER';
    EXCPT HDR1;
 
-   SETLL *START TRANSACT;
    READ TRANSACT;
 
    DOU %EOF(TRANSACT);
@@ -23,7 +22,6 @@ D HDS1          S             50A
       EXCPT DTL1;
 
       // Print each detail
-      SETLL TRNID TRANSDET;
       READE TRNID TRANSDET;
 
       DOU %EOF(TRANSDET) OR TRNID <> TRNID;
