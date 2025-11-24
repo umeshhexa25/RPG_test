@@ -2,14 +2,14 @@ F*******************************************************
 F* REPORT MENU PROGRAM
 F*******************************************************
 FRPTMENU   CF   E             WORKSTN
-
+ 
 D OPTION         S              1A
-
- /FREE
+ 
+/FREE
    *INLR = *OFF;
-
-   DOU OPTION = '4' OR *IN03 = *ON;
-
+ 
+   DOU OPTION = '4';
+ 
       EXFMT RPTSCR;
       SELECT;
         WHEN OPTION = '1';
@@ -19,11 +19,9 @@ D OPTION         S              1A
         WHEN OPTION = '3';
           CALL 'RPTTRANS';
       ENDSL;
-
+ 
    ENDDO;
-
+ 
    *INLR = *ON;
    RETURN;
- /END-FREE
-
-
+/END-FREE
