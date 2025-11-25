@@ -1,0 +1,4 @@
+A          R TRNDTLR                       PFILE(TRANSDET)
+     A          K ITEMID
+     A          K TRNID
+     A          K LOCID

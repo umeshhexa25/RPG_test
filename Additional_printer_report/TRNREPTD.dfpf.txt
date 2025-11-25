@@ -1,0 +1,19 @@
+     A          DSPSIZ(24 80 *DS3)
+     A          INDARA
+
+     A          R SELSCRN
+     A                                      CF03(03)
+     A                                      CF05(05)
+
+     A                                      BOX(2 2 21 78 *D)
+
+     A                                  4 28 'Transaction Report'
+     A                                      DSPATR(HI)
+
+     A                                  8 10 'Item ID:'
+     A            ITEMID      5S 0B  8 25 DSPATR(UL)
+
+     A                                  10 10 'Location:'
+     A            LOCID       5A   B 10 25 DSPATR(UL)
+
+     A                                  14 10 'F5=Print Report'

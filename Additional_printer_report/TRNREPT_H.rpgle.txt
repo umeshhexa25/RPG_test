@@ -1,0 +1,3 @@
+**FREE
+dcl-pr Main extpgm('TRNREPT');
+End-pr; 
