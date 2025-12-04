@@ -1,0 +1,25 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*CALLER);
+
+dcl-s opt char(1);
+
+dow opt <> '3';
+ dsply '1=Add Item 2=Import CSV 3=Exit' '' opt;
+ select;
+   when opt='1';
+     callp addDemoItem();
+   when opt='2';
+     callp importItemsCSV();
+ endsl;
+enddo;
+*inlr=*on;
+
+//---- Subprocedures ----
+
+dcl-proc addDemoItem;
+  callp PROCITEM;
+end-proc;
+
+dcl-proc importItemsCSV;
+  callp CSV2ITEM;
+End-proc;

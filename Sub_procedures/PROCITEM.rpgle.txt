@@ -1,0 +1,57 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS usage(*update) keyed;
+
+dcl-s rc int(10);
+
+rc = AddItem(1004 : 'Wireless Mouse' : 80);
+dsply 'AddItem RC=' + %char(rc);
+
+rc = UpdateStock(1002 : 50);
+dsply 'Update RC=' + %char(rc);
+
+dcl-s nm char(40);
+nm = GetName(1001);
+dsply 'Item 1001=' + %trim(nm);
+*inlr = *on;
+
+//--------- SUBPROCEDURES -------------------
+
+dcl-proc AddItem;
+  dcl-pi *n int(10);
+     id packed(5:0);
+     nm char(40);
+     qty packed(9:0);
+  end-pi;
+
+  ITEMID = id; ITEMNAME = nm; QTYONHAND = qty;
+  write ITEMS;
+  return 0;
+end-proc;
+
+dcl-proc UpdateStock;
+  dcl-pi *n int(10);
+     id packed(5:0);
+     qty packed(9:0);
+  end-pi;
+
+  chain id ITEMS;
+  if %found;
+    QTYONHAND += qty; update ITEMS; return 0;
+  endif;
+  return -1;
+end-proc;
+
+dcl-proc GetName;
+  dcl-pi *n char(40);
+     id packed(5:0);
+  end-pi;
+
+  chain id ITEMS;
+  if %found;
+    return ITEMNAME;
+  else;
+    return 'NOT FOUND';
+  endif;
+End-proc;

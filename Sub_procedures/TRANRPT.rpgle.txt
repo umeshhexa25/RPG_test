@@ -1,0 +1,49 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f TRANSP usage(*input) keyed;
+
+dcl-s x  int(10);
+dcl-s s  varchar(200);
+
+x = open('/tmp/TransRpt.xml': O_CREAT+O_TRUNC+O_WRONLY: S_IRUSR+S_IWUSR);
+writeHead();
+
+setll *start TRANSP;
+read TRANSP;
+dow not %eof(TRANSP);
+   writeRow(%char(ITEMID): %char(TRANDATE): %char(QTY): %trim(TRANTYPE));
+   read TRANSP;
+enddo;
+
+writeTail();
+close x;
+dsply 'Excel Report: /tmp/TransRpt.xml';
+*inlr = *on;
+
+//----- Subprocedures -----
+
+dcl-proc writeXML;
+  dcl-pi *n; t varchar(200); end-pi;
+  t += x'0A';
+  callp write(x:%addr(t):%len(%trim(t)));
+end-proc;
+
+dcl-proc writeHead;
+  writeXML('<?xml version="1.0"?>');
+  writeXML('<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"><Worksheet ss:Name="Transactions"><Table>');
+  writeRow('ID':'DATE':'QTY':'TYPE');
+end-proc;
+
+dcl-proc writeRow;
+  dcl-pi *n; a varchar(50); b varchar(50); c varchar(50); d varchar(50); end-pi;
+  s = '<Row><Cell><Data ss:Type="String">'+%trim(a)+'</Data></Cell>'+
+      '<Cell><Data ss:Type="String">'+%trim(b)+'</Data></Cell>'+
+      '<Cell><Data ss:Type="String">'+%trim(c)+'</Data></Cell>'+
+      '<Cell><Data ss:Type="String">'+%trim(d)+'</Data></Cell></Row>';
+  writeXML(s);
+end-proc;
+
+dcl-proc writeTail;
+  writeXML('</Table></Worksheet></Workbook>');
+End-proc;

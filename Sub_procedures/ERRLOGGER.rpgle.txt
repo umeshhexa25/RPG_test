@@ -1,0 +1,18 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f LOGRPT usage(*output) keyed;
+
+logError('Testing Logging');
+dsply 'Check LOGRPT file';
+*inlr=*on;
+
+dcl-proc logError;
+ dcl-pi *n; msg varchar(200); end-pi;
+
+ LOGID = %int(%timestamp());
+ LOGTIME = %timestamp();
+ LOGPGM = 'ERRLOGGER';
+ LOGMSG = msg;
+ write LOGREC;
+End-proc;
