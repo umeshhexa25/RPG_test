@@ -1,0 +1,2 @@
+dcl-ds ItemDS extname('ITEMS') end-ds;
+dcl-s StatusMsg  char(50);
