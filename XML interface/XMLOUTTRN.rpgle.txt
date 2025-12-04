@@ -1,0 +1,108 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW) option(*SRCSTMT:*NODEBUGIO);
+
+dcl-f POSTTRAN if e k disk;
+
+dcl-s XmlFile  int(10);
+dcl-s XmlLine  varchar(500);
+
+dcl-s TranTypeTxt varchar(10);
+
+*inlr = *off;
+
+// Open XML file on IFS
+XmlFile = open('/tmp/PostTranReport.xml':
+                O_CREAT + O_TRUNC + O_WRONLY:
+                S_IRUSR + S_IWUSR);
+
+if XmlFile < 0;
+   dsply 'Unable to open XML file!';
+   *inlr = *on;
+   return;
+endif;
+
+// Write SpreadsheetML Header
+XmlLine = '<?xml version="1.0"?>';
+writeXML(XmlLine);
+
+XmlLine = '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet">';
+writeXML(XmlLine);
+XmlLine = '<Worksheet ss:Name="Transactions">';
+writeXML(XmlLine);
+XmlLine = '<Table>';
+writeXML(XmlLine);
+
+// Column Headers
+writeRow('ItemID' : 'Date' : 'Qty' : 'Type');
+
+// Read Data
+setll *start POSTTRAN;
+read POSTTRAN;
+
+dow not %eof(POSTTRAN);
+
+   select;
+      when TRANTYPE = 'P';
+        TranTypeTxt = 'Purchase';
+      when TRANTYPE = 'I';
+        TranTypeTxt = 'Issue';
+      other;
+        TranTypeTxt = 'Other';
+   endsl;
+
+   writeRow(%char(ITEMID):
+            %char(TRANDATE):
+            %char(QTY):
+            TranTypeTxt);
+
+   read POSTTRAN;
+enddo;
+
+// Close XML tags
+XmlLine = '</Table>';
+writeXML(XmlLine);
+XmlLine = '</Worksheet>';
+writeXML(XmlLine);
+XmlLine = '</Workbook>';
+writeXML(XmlLine);
+
+close XmlFile;
+
+dsply 'Excel XML report generated:';
+dsply '/tmp/PostTranReport.xml';
+
+*inlr = *on;
+
+//-----------------------------------------------
+// Local Subprocedure: WriteXML
+//-----------------------------------------------
+dcl-proc writeXML;
+  dcl-pi *n;
+    text varchar(500);
+  end-pi;
+
+  text += x'25' + x'0A'; // Add CR/LF
+  callp write(XmlFile: %addr(text): %len(%trim(text)));
+
+end-proc;
+
+//-----------------------------------------------
+// Local Subprocedure: writeRow
+//-----------------------------------------------
+dcl-proc writeRow;
+  dcl-pi *n;
+    c1 varchar(50);
+    c2 varchar(50);
+    c3 varchar(50);
+    c4 varchar(50);
+  end-pi;
+
+  XmlLine = '<Row>' +
+            '<Cell><Data ss:Type="String">' + %trim(c1) + '</Data></Cell>' +
+            '<Cell><Data ss:Type="String">' + %trim(c2) + '</Data></Cell>' +
+            '<Cell><Data ss:Type="String">' + %trim(c3) + '</Data></Cell>' +
+            '<Cell><Data ss:Type="String">' + %trim(c4) + '</Data></Cell>' +
+            '</Row>';
+  writeXML(XmlLine);
+
+End-proc;
