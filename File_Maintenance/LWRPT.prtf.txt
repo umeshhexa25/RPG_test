@@ -1,0 +1,6 @@
+     A          R HEADER
+     A            TITLE    40A      'Low Stock Items'
+     A          R DETAIL
+     A            ITEMID    5P 0
+     A            ITEMNAME 40A
+     A            QTYONHAND 9S 0

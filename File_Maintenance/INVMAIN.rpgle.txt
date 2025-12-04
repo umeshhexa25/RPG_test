@@ -1,0 +1,22 @@
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-s opt char(1);
+
+dow opt <> '6';
+
+  dsply 'Inventory Menu'.
+  dsply '1=Add Item 2=Update Item 3=Delete Item'.
+  dsply '4=Low Stock Report 5=CSV Import 6=Exit' '' opt;
+
+  select;
+    when opt='1'; call 'ADDITEM';
+    when opt='2'; call 'UPDITEM';
+    when opt='3'; call 'DLTITEM';
+    when opt='4'; call 'LWRPT';
+    when opt='5'; call 'CSV2ITEM';
+    other;
+       if opt<>'6'; dsply 'Invalid Option'; endif;
+  endsl;
+enddo;
+
+*inlr=*on;

@@ -1,0 +1,48 @@
+**FREE
+ctl-opt dftactgrp(*NO);
+
+dcl-f ITEMS usage(*update) keyed;
+dcl-f ITEMDMOD workstn;
+
+dcl-s status char(50);
+
+exfmt SCREEN;
+
+if ITEMID <= 0 or %trim(ITEMNAME) = '';
+   dsply 'Invalid Input!';
+else;
+   QTYONHAND = %max(QTYONHAND:0);  // calculation & conditional
+   write ITEMS;
+   dsply 'Record Added!';
+endif;
+
+if QTYONHAND < 0;
+  LogErr('Add qty invalid: <0' : 'ADDITEM');
+  dsply 'BAD QTY!';
+  *inlr=*on;
+  return;
+endif;
+LogErr('Item added: ' + %char(ITEMID) : 'ADDITEM');
+dsply 'Added';
+
+
+if not %found;
+  LogErr('Update ID not found: ' + %char(ITEMID) : 'UPDITEM');
+else;
+  update ITEMS;
+  LogErr('Stock Updated for: ' + %char(ITEMID) : 'UPDITEM');
+Endif;
+
+if %found and QTYONHAND = 0;
+   delete ITEMS;
+   LogErr('Deleted ID: ' + %char(ITEMID) : 'DLTITEM');
+else;
+   LogErr('Delete blocked: ' +
+        %char(ITEMID) + ' Stock=' + %char(QTYONHAND)
+         : 'DLTITEM');
+Endif;
+
+LogErr('Low stock report generated':'LWRPT');
+
+*inlr = *on;
+Return;

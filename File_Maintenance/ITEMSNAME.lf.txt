@@ -1,0 +1,2 @@
+ A          R ITEMSNR                    PFILE(ITEMS)
+ A          K ITEMNAME

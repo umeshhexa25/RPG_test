@@ -1,0 +1,13 @@
+**FREE
+dcl-proc LogErr export;
+  dcl-pi *n;
+    msg varchar(200);
+    pgm varchar(10);
+  end-pi;
+
+  LOGID = %int(%timestamp());
+  LOGTIME = %timestamp();
+  LOGPGM = pgm;
+  LOGMSG = msg;
+  write LOGREC;
+End-proc;

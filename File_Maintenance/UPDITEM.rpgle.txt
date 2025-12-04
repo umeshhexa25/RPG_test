@@ -1,0 +1,20 @@
+**FREE
+ctl-opt dftactgrp(*NO);
+
+dcl-f ITEMS usage(*update) keyed;
+dcl-f ITEMDMOD workstn;
+
+exfmt SCREEN;
+
+chain ITEMID ITEMS;
+if %found;
+   ITEMNAME = %trim(ITEMNAME);
+   QTYONHAND = QTYONHAND + 5; // calculation example
+   update ITEMS;
+   dsply 'Record Updated!';
+else;
+   dsply 'Item Not Found!';
+endif;
+
+*inlr = *on;
+

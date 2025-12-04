@@ -1,0 +1,12 @@
+     A          DSPSIZ(24 80 *DS3)
+     A          INDARA
+     A          CF03(03 'Exit')
+     A          CF05(05 'Submit')
+     A          R SCREEN
+     A            ITEMID        5P 0B  5 20
+     A                                  DSPATR(UL)
+     A            ITEMNAME     40A B  7 20
+     A            QTYONHAND     9S 0B  9 20
+     A                                  DSPATR(UL)
+     A               21 10 'F5=Submit   F3=Exit'
+
