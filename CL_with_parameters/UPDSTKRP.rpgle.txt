@@ -1,0 +1,34 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS usage(*update) keyed;
+dcl-f LOGRPT usage(*output) keyed;
+
+// ---------- Parameters ----------
+dcl-pi *n;
+   pItemID     packed(5:0);
+   pQtyChange  packed(9:0);
+end-pi;
+
+chain pItemID ITEMS;
+
+if %found;
+   QTYONHAND += pQtyChange;
+   update ITEMS;
+
+   // Log change
+   LOGID = %int(%timestamp());
+   LOGTIME = %timestamp();
+   LOGPGM = 'UPDSTKRP';
+   LOGMSG = 'Stock Updated: ID=' + %char(pItemID) +
+            ' Change=' + %char(pQtyChange);
+   write LOGREC;
+
+   dsply 'Stock updated successfully!';
+else;
+   dsply 'Item not found!';
+endif;
+
+*inlr = *on;
+Return;
+

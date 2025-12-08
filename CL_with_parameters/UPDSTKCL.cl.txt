@@ -1,0 +1,23 @@
+PGM
+
+/* Add application library */
+ADDLIBLE LIB(INVENTLIB)
+
+/* Declare variables */
+DCL VAR(&ITEM) TYPE(*DEC) LEN(5 0)
+DCL VAR(&CHANGE) TYPE(*DEC) LEN(9 0)
+
+/* Example Values */
+CHGVAR VAR(&ITEM) VALUE(1001)
+CHGVAR VAR(&CHANGE) VALUE(25)
+
+/* Call RPGLE with parameters */
+CALL PGM(INVENTLIB/UPDSTKRP) +
+     PARM(&ITEM &CHANGE)
+
+/* Completion message */
+SNDPGMMSG MSG('Stock Update completed via UPDSTKCL') +
+          TOPGMQ(*EXT) MSGTYPE(*INFO)
+
+ENDPGM
+
