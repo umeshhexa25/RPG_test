@@ -1,0 +1,26 @@
+/*==============================================================*/
+/* Program: UPDSTKCLL                                            */
+/* DESC: Pass parameters to RPGLE stock update program           */
+/*==============================================================*/
+PGM
+
+             /* Add library containing program and files  */
+             ADDLIBLE LIB(INVENTLIB) POSITION(*FIRST)
+
+             /* Declare decimal parameters */
+             DCL VAR(&ITEMID) TYPE(*DEC) LEN(5 0)
+             DCL VAR(&QTYCHG) TYPE(*DEC) LEN(9 0)
+
+             /* Assign sample values */
+             CHGVAR VAR(&ITEMID) VALUE(1001)
+             CHGVAR VAR(&QTYCHG) VALUE(10)
+
+             /* Call RPG program with parameters */
+             CALL PGM(INVENTLIB/UPDSTKRP) +
+                  PARM(&ITEMID &QTYCHG)
+
+             /* Show completion message */
+             SNDPGMMSG MSG('Stock Update Successful - Checked by UPDSTKCLL') +
+                       TOPGMQ(*EXT) MSGTYPE(*COMP)
+
+ENDPGM
