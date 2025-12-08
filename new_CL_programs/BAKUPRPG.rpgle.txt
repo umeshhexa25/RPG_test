@@ -1,0 +1,86 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS   usage(*input) keyed;
+dcl-f TRANSP  usage(*input) keyed;
+dcl-f LOGRPT  usage(*output) keyed;
+
+dcl-s f1 int(10);
+dcl-s f2 int(10);
+dcl-s msg varchar(200);
+dcl-s ds  varchar(200);
+
+monitor;
+   f1 = open('/backup/items_backup.csv'
+              : O_CREAT+O_TRUNC+O_WRONLY
+              : S_IRUSR+S_IWUSR+S_IROTH);
+
+   writeLine(f1: 'ITEMID,ITEMNAME,QTYONHAND');
+
+   setll *start ITEMS;
+   read ITEMS;
+   dow not %eof(ITEMS);
+      ds = %char(ITEMID) + ',' +
+           %trim(ITEMNAME) + ',' +
+           %char(QTYONHAND);
+      writeLine(f1: ds);
+      read ITEMS;
+   enddo;
+   close f1;
+
+   f2 = open('/backup/trans_backup.csv'
+              : O_CREAT+O_TRUNC+O_WRONLY
+              : S_IRUSR+S_IWUSR+S_IROTH);
+
+   writeLine(f2: 'ITEMID,TRANDATE,QTY,TRANTYPE');
+
+   setll *start TRANSP;
+   read TRANSP;
+   dow not %eof(TRANSP);
+      ds = %char(ITEMID) + ',' +
+           %char(TRANDATE) + ',' +
+           %char(QTY) + ',' +
+           %trim(TRANTYPE);
+      writeLine(f2: ds);
+      read TRANSP;
+   enddo;
+   close f2;
+
+   msg = 'BACKUP COMPLETED: ITEMS & TRANSP';
+   logEvent(msg);
+   dsply msg;
+
+on-error;
+   msg = 'BACKUP FAILED: ' + %char(%status());
+   logEvent(msg);
+   dsply msg;
+endmon;
+
+*inlr = *on;
+
+
+//-----------------------------
+// Subprocedure: Write CSV
+//-----------------------------
+dcl-proc writeLine;
+  dcl-pi *n;
+     file int(10);
+     text varchar(200);
+  end-pi;
+  text += x'0A';
+  callp write(file: %addr(text): %len(%trim(text)));
+end-proc;
+
+
+//-----------------------------
+// Subprocedure: Log Entry
+//-----------------------------
+dcl-proc logEvent;
+ dcl-pi *n; pMsg varchar(200); end-pi;
+
+ LOGID = %int(%timestamp());
+ LOGTIME = %timestamp();
+ LOGPGM = 'BKUPRPG';
+ LOGMSG = %trim(pMsg);
+ write LOGREC;
+end-proc;

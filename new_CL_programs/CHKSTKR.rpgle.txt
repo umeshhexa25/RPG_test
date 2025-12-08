@@ -1,0 +1,39 @@
+dcl-f ITEMS usage(*update) keyed;
+dcl-f LOGRPT usage(*output) keyed;
+
+dcl-s cnt int(10) inz(0);
+
+//----------------------
+// Main Logic
+//----------------------
+setll *start ITEMS;
+read ITEMS;
+
+dow not %eof(ITEMS);
+
+   if QTYONHAND < 0;
+      cnt += 1;
+
+      // Log the issue
+      LOGID = %int(%timestamp());
+      LOGTIME = %timestamp();
+      LOGPGM = 'CHKSTKR';
+      LOGMSG = 'Negative Stock Fixed: ' + %char(ITEMID);
+      write LOGREC;
+
+      QTYONHAND = 0;
+      update ITEMS;
+   endif;
+
+   read ITEMS;
+enddo;
+
+// Send final message
+if cnt > 0;
+   dsply %char(cnt) + ' Items Corrected!';
+else;
+   dsply 'No Negative Stock Found.';
+endif;
+
+*inlr = *on;
+return;

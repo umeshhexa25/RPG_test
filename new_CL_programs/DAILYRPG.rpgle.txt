@@ -1,0 +1,45 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS     usage(*input) keyed;
+dcl-f DAILYRPTF printer(132);
+dcl-f LOGRPT    usage(*output) keyed;
+
+dcl-s recCnt int(10) inz(0);
+
+// Print Header & Column Names
+TITLE = 'DAILY STOCK REPORT - ' + %char(%date());
+write HDR;
+write COLHDG;
+
+// Read the items and print
+setll *start ITEMS;
+read ITEMS;
+
+dow not %eof(ITEMS);
+
+   recCnt += 1;
+   write DTL;
+
+   read ITEMS;
+enddo;
+
+// Footer
+write FTR;
+
+// Log result
+dcl-s logMsg varchar(200);
+logMsg = 'Daily Report Generated. Records=' + %char(recCnt);
+
+LOGID   = %int(%timestamp());
+LOGTIME = %timestamp();
+LOGPGM  = 'DAILYRPT';
+LOGMSG  = logMsg;
+write LOGREC;
+
+// Joblog message for CL
+dsply logMsg;
+
+// End program
+*inlr = *on;
+return;

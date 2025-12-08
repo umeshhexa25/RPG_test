@@ -1,0 +1,20 @@
+     A          R HDR
+     A                                      SPACEA(1)
+     A            TITLE         40A         'Daily Inventory Report'
+     A                                      SPACEA(2)
+
+     A          R COLHDG
+     A            CH1           5A          'ID'
+     A            CH2          40A          'NAME'
+     A            CH3           9A          'QTY'
+     A                                      SPACEA(1)
+
+     A          R DTL
+     A            ITEMID        5P 0
+     A            ITEMNAME     40A
+     A            QTYONHAND     9S 0
+
+     A          R FTR
+     A                                      SPACEA(2)
+     A            DONE          30A         '--- END OF REPORT ---'
+
