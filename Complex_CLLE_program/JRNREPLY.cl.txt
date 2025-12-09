@@ -1,0 +1,52 @@
+PGM        PARM(&P_JRNLIB &P_JRN &P_FILELIB &P_FILE)
+     /*-------------------------------------------------------------------*/
+     /*  Journal Recovery Utility Program (JRNREPLY)                      */
+     /*  Applies or Removes Journal Changes for a specified file          */
+     /*-------------------------------------------------------------------*/
+
+     DCL        VAR(&P_JRNLIB) TYPE(*CHAR) LEN(10) /* Journal Library */
+     DCL        VAR(&P_JRN) TYPE(*CHAR) LEN(10)    /* Journal Name */
+     DCL        VAR(&P_FILELIB) TYPE(*CHAR) LEN(10)/* File Library */
+     DCL        VAR(&P_FILE) TYPE(*CHAR) LEN(10)   /* File Name */
+     DCL        VAR(&L_RTNSEQ) TYPE(*DEC) LEN(10 0) /* RTVJRNE Seq Number */
+     DCL        VAR(&L_ERROR) TYPE(*LGL) LEN(1) VALUE('0')
+
+     /* Monitor for any errors and jump to ENDPGM */
+     MONMSG     MSGID(CPF0000) EXEC(CHGVAR VAR(&L_ERROR) VALUE('1'))
+
+     SNDPGMMSG  MSG('Starting Journal Recovery Utility for ' *CAT &P_FILE) +
+                MSGTYPE(*INFO)
+
+     /* 1. Retrieve the *LAST* sequence number for auditing purposes */
+     /* This RTVJRNE example is for illustration; APYJRNCHG is the core recovery command */
+     RTVJRNE    JRN(&P_JRNLIB/&P_JRN) FILE(&P_FILELIB/&P_FILE) +
+                FROMENT(*LAST) TOENT(*FIRST) SEARCH(*DESCEND) +
+                RTNSEQNBR(&L_RTNSEQ)
+     MONMSG     MSGID(CPF3840) /* No journal entries found */
+
+     SNDPGMMSG  MSG('Last Journal Entry Sequence Number: ' *CAT &L_RTNSEQ) +
+                MSGTYPE(*INFO)
+
+     /* 2. Apply journaled changes to synchronize the file */
+     /* Assumes you restored a saved version of the file and now want to catch up */
+     APYJRNCHG  JRN(&P_JRNLIB/&P_JRN) FILE((&P_FILELIB/&P_FILE)) +
+                RCVRNG(*FIRST *LAST) +
+                FROMENT(*FIRST) TOENT(*LAST) +
+                OBJOPT(*ALL)
+     MONMSG     MSGID(CPF0000) EXEC(DO) /* Monitor errors during apply */
+        SNDPGMMSG  MSG('Error applying changes. Check job log.') +
+                   MSGTYPE(*ESCAPE) TOPGMQ(*EXT)
+        CHGVAR     VAR(&L_ERROR) VALUE('1')
+     ENDDO
+
+
+     IF         COND(&L_ERROR *EQ '0') THEN(DO)
+        SNDPGMMSG  MSG('Journal changes applied successfully.') MSGTYPE(*COMP)
+     ENDDO
+
+
+ ENDPGM:
+     /* Cleanup not required as this utility program ends cleanly */
+     RETURN
+
+     ENDPGM

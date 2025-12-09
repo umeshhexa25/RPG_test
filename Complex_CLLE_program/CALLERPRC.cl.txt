@@ -1,0 +1,77 @@
+PGM        CALLERPRC
+     /*-------------------------------------------------------------------*/
+     /*  CALLERPRC (Merged ILE): Sequential logic implemented internally  */
+     /*-------------------------------------------------------------------*/
+
+     DCL        VAR(&L_STATUS) TYPE(*CHAR) LEN(10) /* e.g. 'SUCCESS', 'FAILED' */
+
+     MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(ERROR_HANDLER))
+
+     SNDPGMMSG  MSG('Starting the main processing sequence.') MSGTYPE(*INFO)
+
+     /* --- Step 1: Execute "PGMA" logic via internal procedure --- */
+     CALLPRC    PRC(RUN_PGMA_LOGIC) RTNVAR(&L_STATUS)
+
+     IF         COND(&L_STATUS *EQ 'SUCCESS') THEN(DO)
+        SNDPGMMSG  MSG('PGMA logic completed successfully. Proceeding to PGMB logic.') +
+                   MSGTYPE(*INFO)
+
+        /* --- Step 2: Execute "PGMB" logic via internal procedure --- */
+        CALLPRC    PRC(RUN_PGMB_LOGIC)
+
+     ENDDO
+     ELSE       CMD(DO)
+        SNDPGMMSG  MSG('PGMA logic failed. Bypassing PGMB logic.') MSGTYPE(*WARN)
+     ENDDO
+
+     GOTO       CMDLBL(CLEANUP)
+
+
+ ERROR_HANDLER:
+     /* A severe error occurred within the main PGM block */
+     SNDPGMMSG  MSG('Severe error in main program. Sequence terminated.') +
+                MSGTYPE(*ESCAPE) TOPGMQ(*EXT)
+
+ CLEANUP:
+     RMVMSG     CLEAR(*ALL)
+     SNDPGMMSG  MSG('CALLERPRC finished processing.') MSGTYPE(*COMP)
+     RETURN
+
+     ENDPGM
+     /*-------------------------------------------------------------------*/
+     /*  Procedure Definition for PGMA Logic                              */
+     /*-------------------------------------------------------------------*/
+     PRC        RUN_PGMA_LOGIC   PARM(&P_STATUS_OUT)
+
+     DCL        VAR(&P_STATUS_OUT) TYPE(*CHAR) LEN(10)
+
+     /* Monitor for internal errors within this procedure only */
+     MONMSG     MSGID(CPF0000) EXEC(GOTO CMDLBL(PGMA_ERR))
+
+     CHGVAR     VAR(&P_STATUS_OUT) VALUE('FAILED') /* Default to failed */
+
+     SNDPGMMSG  MSG('Procedure PGMA logic is starting work...') MSGTYPE(*INFO)
+     DLYJOB     DLY(1) /* Simulate some work */
+
+     /* If we reach here, it's successful */
+     CHGVAR     VAR(&P_STATUS_OUT) VALUE('SUCCESS')
+     SNDPGMMSG  MSG('Procedure PGMA logic completed successfully.') MSGTYPE(*COMP)
+     RETURN
+
+ PGMA_ERR:
+     /* An error occurred during processing, return 'FAILED' */
+     SNDPGMMSG  MSG('Error in PGMA logic.') MSGTYPE(*DIAG)
+     RETURN /* Returns with 'FAILED' value still in &P_STATUS_OUT */
+
+     ENDPRC
+     /*-------------------------------------------------------------------*/
+     /*  Procedure Definition for PGMB Logic                              */
+     /*-------------------------------------------------------------------*/
+     PRC        RUN_PGMB_LOGIC
+
+     SNDPGMMSG  MSG('Procedure PGMB logic is running because PGMA succeeded.') +
+                MSGTYPE(*INFO)
+     /* More PGMB specific logic here */
+     RETURN
+
+     ENDPRC
