@@ -1,0 +1,50 @@
+**FREE
+//==============================================================
+// Program : CALLCL1
+// Purpose : Simple RPGLE program that calls a CL program
+// File    : ITEMS
+//==============================================================
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS keyed usage(*input);
+
+// Parameter to pass to CL
+dcl-s ItemID packed(5:0);
+
+// Prompt user
+dsply 'Enter Item ID:' '' ItemID;
+
+// Read item
+chain ItemID ITEMS;
+
+if not %found(ITEMS);
+   dsply ('Item ' + %char(ItemID) + ' not found.');
+   *inlr = *on;
+   return;
+endif;
+
+//--------------------------------------
+// Call CL Program with ItemID parameter
+//--------------------------------------
+callp(e) CallPgmCL(ItemID);
+
+// End
+dsply 'CL Program executed successfully.';
+*inlr = *on;
+return;
+
+
+//==============================================================
+// Subprocedure: Calls CL program normally using CALL … PARM
+//==============================================================
+dcl-proc CallPgmCL;
+
+   dcl-pi *n;
+      pItemID packed(5:0) const;
+   end-pi;
+
+   // Simple CALL statement
+   call 'INVENTLIB/CLLOGITEM' pItemID;
+
+End-proc;
+

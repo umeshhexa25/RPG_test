@@ -1,0 +1,15 @@
+ /*==============================================================*/
+/* Program : CLLOGITEM                                           */
+/* Purpose : Receive ItemID from RPG and log a message           */
+/*==============================================================*/
+PGM        PARM(&ITEMID)
+
+DCL VAR(&ITEMID) TYPE(*DEC) LEN(5 0)
+
+/* Log the message */
+SNDPGMMSG MSG('CLLOGITEM: Received Item ' *CAT &ITEMID) +
+          TOPGMQ(*EXT) MSGTYPE(*INFO)
+
+ENDPGM
+
+
