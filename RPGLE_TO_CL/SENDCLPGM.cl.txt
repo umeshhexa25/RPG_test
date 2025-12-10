@@ -1,0 +1,20 @@
+/*=================================================================*/
+/* Program : SENDCLPGM                                              */
+/* Purpose : Simple CL program called from RPGLE                    */
+/* Function: Logs item details to job log                           */
+/*=================================================================*/
+PGM        PARM(&ITEMID &ITEMNAME &RC)
+
+DCL VAR(&ITEMID)   TYPE(*DEC)  LEN(5 0)
+DCL VAR(&ITEMNAME) TYPE(*CHAR) LEN(30)
+DCL VAR(&RC)       TYPE(*CHAR) LEN(10)
+
+/* Display/log message */
+SNDPGMMSG MSG('SENDCLPGM: Item=' *CAT &ITEMID +
+              ' Name=' *CAT &ITEMNAME) +
+          TOPGMQ(*EXT) MSGTYPE(*INFO)
+
+/* Return OK flag */
+CHGVAR &RC 'OK'
+
+ENDPGM

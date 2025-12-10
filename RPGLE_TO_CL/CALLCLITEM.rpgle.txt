@@ -1,0 +1,92 @@
+**FREE
+//==============================================================
+// Program : CALLCLITEM
+// Purpose : Read an item and call a CLLE program with parameters
+// Files   : ITEMS (PF), LOGRPT (PF)
+//==============================================================
+ctl-opt dftactgrp(*NO) actgrp(*NEW) option(*SRCSTMT:*NODEBUGIO);
+
+// ---------------- File Declarations -------------------------
+dcl-f ITEMS   usage(*input) keyed;
+dcl-f LOGRPT  usage(*output) keyed;
+
+// ---------------- Work Variables ----------------------------
+dcl-s pItemID     packed(5:0);
+dcl-s pItemName   char(30);
+dcl-s rc          char(10);
+dcl-s Timestamp   timestamp;
+
+// ---------------- Parameter Interface ------------------------
+dcl-pi *n; end-pi;
+
+// ---------------- Main Logic -------------------------------
+
+// Ask for Item ID
+dsply 'Enter Item ID:' '' pItemID;
+
+// Fetch Item
+chain pItemID ITEMS;
+
+if not %found(ITEMS);
+   dsply ('Item ' + %char(pItemID) + ' not found.');
+   *inlr = *on;
+   return;
+endif;
+
+// Save name for passing
+pItemName = ITEMNAME;
+
+// ------------------------------------------------------------
+// CALL CL PROGRAM
+// ------------------------------------------------------------
+callp(e) CallPgm('INVENTLIB/SENDCLPGM': pItemID: pItemName: rc);
+
+if rc <> 'OK';
+   dsply ('CL Program Returned Error for Item ' + %char(pItemID));
+else;
+   dsply ('CL Program Successfully Logged Item ' + %char(pItemID));
+endif;
+
+
+// ------------------------------------------------------------
+// WRITE LOG ENTRY
+// ------------------------------------------------------------
+Timestamp = %timestamp();
+LOGTIME    = Timestamp;
+LOGPGM     = 'CALLCLITEM';
+LOGID      = %int(%seconds(Timestamp));
+LOGMSG     = 'CL call for Item ' + %char(pItemID) +
+             ' RC=' + rc;
+
+write LOGREC;
+
+// End RPG
+*inlr = *on;
+return;
+
+
+//==============================================================
+// SUBPROCEDURE : CallPgm → Standard CL call wrapper
+//==============================================================
+dcl-proc CallPgm;
+   dcl-pi *n;
+      pgmName   char(20) const;
+      itemNum   packed(5:0) const;
+      itemNm    char(30)   const;
+      rtnVal    char(10);
+   end-pi;
+
+   dcl-s cmd char(200);
+
+   // Build CALL command dynamically
+   cmd = 'CALL PGM(' + %trim(pgmName) + ') ' +
+         'PARM(' + %char(itemNum) + ' ' +
+         %trim(itemNm) + ' RTN)' ;
+
+   // Run it
+   callp system(cmd);
+
+   rtnVal = 'OK';
+
+End-proc;
+
