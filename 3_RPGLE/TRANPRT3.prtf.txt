@@ -1,0 +1,10 @@
+A                                      INDARA
+A          R TRNHEAD
+A                                  2  2 'TRANSACTION SUMMARY'
+A                                  3  2 'DATE         ITEMID  TYPE   QTY'
+
+A          R TRNDET
+A            DDATE        L       5  2
+A            DITEM        5S 0   5 14
+A            DTYPE        1A     5 24
+A            DQTY         7S 0   5 32

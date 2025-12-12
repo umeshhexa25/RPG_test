@@ -1,0 +1,10 @@
+A                                      DSPSIZ(24 80 *DS3)
+A          R MAINREC1
+A                                      CF03(03)
+A                                      OVERLAY
+A            TITLE1        40A  O  2 20 'ITEM MASTER REPORT'
+A            LINE1          1A  B  4  2 DSPATR(UL)
+A            LINECOUNT      3S 0B  6 16
+A                                      DSPATR(PR)
+A                                  24  2 'F3=Exit'
+

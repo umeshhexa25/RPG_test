@@ -1,0 +1,7 @@
+A                                      DSPSIZ(24 80 *DS3)
+A          R MAINREC3
+A                                      CF03(03)
+A            TITLER     40A   O  2 20 'TRANSACTION SUMMARY'
+A            FRMDATE      L    B  6 20
+A            TODATE       L    B  8 20
+A                                  24  2 'F3=Exit'

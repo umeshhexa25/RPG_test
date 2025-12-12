@@ -1,0 +1,6 @@
+A                                      DSPSIZ(24 80 *DS3)
+A          R MAINREC2
+A                                      CF03(03)
+A            TITLE       40A  O  2 20 'STOCK BY LOCATION REPORT'
+A            LOCINP       3A  B  6 20
+A                                  24  2 'F3=Exit'

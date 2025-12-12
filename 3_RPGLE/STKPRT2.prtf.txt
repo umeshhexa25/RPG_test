@@ -1,0 +1,10 @@
+A                                      INDARA
+A          R STKHEAD
+A                                  2  2 'LOCATION WISE STOCK'
+A                                  3  2 'LOC   ITEMID   NAME                        QTY'
+
+A          R STKDET
+A            LOC         3A       5  2
+A            SITEMID     5S 0     5  8
+A            SNAME      30A       5 16
+A            SQTY        9S 0     5 50

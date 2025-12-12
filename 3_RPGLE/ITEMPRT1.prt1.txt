@@ -1,0 +1,10 @@
+A                                      INDARA
+A          R ITEMHEAD
+A                                      SPACEA(2)
+A                                  2  2 'ITEM MASTER REPORT'
+A                                  3  2 'ID     NAME                         QTY'
+
+A          R ITEMDET
+A            ITMID         5S 0     5  2
+A            ITMNAME      30A       5 10
+A            ITMQTY        9S 0     5 45

@@ -1,0 +1,37 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f STKDSP2 workstn;
+dcl-f STOCKL   keyed usage(*input);
+dcl-f ITEMS    keyed usage(*input);
+dcl-f STKPRT2 printer(132);
+
+dcl-s loc char(3);
+
+// Get location from display
+write MAINREC2;
+read  MAINREC2;
+
+loc = LOCINP;
+
+// Print header
+write STKHEAD;
+
+// Read by location
+chain loc STOCKL;
+dow not %eof(STOCKL);
+
+   chain STOCKL.ITEMID ITEMS;
+
+   LOC    = loc;
+   SITEMID = STOCKL.ITEMID;
+   SNAME   = ITEMNAME;
+   SQTY    = STOCKL.QTY;
+
+   write STKDET;
+
+   reade loc STOCKL;
+enddo;
+
+*inlr = *on;
+return;
