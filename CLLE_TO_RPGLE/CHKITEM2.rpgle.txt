@@ -1,0 +1,29 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS keyed usage(*input);
+
+dcl-pi *n;
+   itemid packed(5:0);
+   rc     char(10);
+end-pi;
+
+chain itemid ITEMS;
+
+if not %found(ITEMS);
+   rc = 'NOTFND';
+   *inlr=*on;
+   return;
+endif;
+
+ 
+/*------------------------------------*/
+/* CALL SMALL CL PROGRAM FROM RPGLE   */
+/*------------------------------------*/
+call 'INVENTLIB/LOGCL2' itemid;
+
+/* return success */
+rc = 'OK';
+*inlr=*on;
+Return; 
+

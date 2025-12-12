@@ -1,0 +1,53 @@
+/*======================================================================*/
+/* Program : MASTERCL                                                   */
+/* Type    : CLLE                                                       */
+/* Purpose :                                                             */
+/*   - Call RPGLE #1 with parameters                                     */
+/*   - Call RPGLE #2 with parameters                                     */
+/*   - Call ILE service program procedure                                */
+/*   - Fully integrated with Inventory Management System                 */
+/*======================================================================*/
+PGM        PARM(&ITEMID &QTY)
+
+             /* Incoming parameters */
+DCL VAR(&ITEMID)   TYPE(*DEC) LEN(5 0)
+DCL VAR(&QTY)      TYPE(*DEC) LEN(7 0)
+
+             /* Returned values */
+DCL VAR(&RC1)      TYPE(*CHAR) LEN(10)
+DCL VAR(&RC2)      TYPE(*CHAR) LEN(10)
+DCL VAR(&ILEMSG)   TYPE(*CHAR) LEN(50)
+
+
+/*------------------------------------------------------------------*/
+/* CALL RPGLE PROGRAM 1 (UPDSTK1) – Update Stock                    */
+/*------------------------------------------------------------------*/
+SNDPGMMSG MSG('Calling RPGLE Program UPDSTK1...')
+CALL   PGM(INVENTLIB/UPDSTK1) +
+       PARM(&ITEMID &QTY &RC1)
+
+SNDPGMMSG MSG('UPDSTK1 completed. Return=' *CAT &RC1)
+
+
+/*------------------------------------------------------------------*/
+/* CALL ILE PROCEDURE THROUGH CALLPRC                               */
+/* ILE Service Program: INVSRV                                      */
+/* Procedure     : GETMSG                                            */
+/*------------------------------------------------------------------*/
+SNDPGMMSG MSG('Calling ILE Procedure INVSRV/GETMSG...')
+
+CALLPRC PRC(INVSRV/GETMSG) +
+        PARM(&ITEMID &ILEMSG)
+
+SNDPGMMSG MSG('ILE Message Returned: ' *CAT &ILEMSG)
+
+
+/*------------------------------------------------------------------*/
+/* CALL RPGLE PROGRAM 2 (CHKITEM2) – This RPG calls CL inside it    */
+/*------------------------------------------------------------------*/
+SNDPGMMSG MSG('Calling RPGLE Program CHKITEM2...')
+CALL   PGM(INVENTLIB/CHKITEM2) +
+       PARM(&ITEMID &RC2)
+
+SNDPGMMSG MSG('CHKITEM2 completed. Return=' *CAT &RC2)
+ENDPGM

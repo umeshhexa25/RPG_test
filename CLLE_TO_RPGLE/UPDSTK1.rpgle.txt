@@ -1,0 +1,25 @@
+**FREE
+ctl-opt dftactgrp(*NO) actgrp(*NEW);
+
+dcl-f ITEMS keyed usage(*update);
+
+dcl-pi *n;
+   itemid    packed(5:0);
+   qty       packed(7:0);
+   rc        char(10);
+end-pi;
+
+chain itemid ITEMS;
+
+if not %found(ITEMS);
+   rc = 'NOTFND';
+   *inlr = *on;
+   return;
+endif;
+
+qtyonhand += qty;
+update ITEMS;
+
+rc = 'UPDATED';
+*inlr = *on;
+Return; 
