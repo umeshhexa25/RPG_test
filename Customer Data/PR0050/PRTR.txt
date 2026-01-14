@@ -1,0 +1,16 @@
+A          R PRTRR
+A            CO            2  0
+A            EMPNO         6  0
+A            PEDATE        6  0
+A            DEPT          4  0
+A            HOUR1         5  2
+A            HOUR2         5  2
+A            HOUR3         5  2
+A            HOUR4         5  2
+A            HOUR5         5  2
+A            HOUR6         5  2
+A            SOURCE        1A
+A            DELFLG        1A
+A          K CO
+A          K EMPNO
+A          K PEDATE

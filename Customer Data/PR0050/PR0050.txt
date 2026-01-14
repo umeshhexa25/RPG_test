@@ -1,0 +1,318 @@
+H    P                         B
+F*
+F*  ADD / UPDATE PROPOSAL
+F*
+FSCREEN  CP  F    1000            WORKSTN
+FPRMAST  ID  F6400 640L 8AI     1 DISK
+FPRTRAN  UC  F 128 128R 8AI     1 DISK                      A
+FPRTR    IC  F 128 128 14AI     1 DISK
+FGLDEPT  IC  F  64  64R 4AI     1 DISK
+E*************** EMPLOYEE DEDUCTIONS
+E                    ECD         8  2 0
+E                    EF          8  2 0
+E                    EDD         8  7 2
+E                    EBAL        8  7 2
+E                    EYTD       18  9 2
+E                    C1         12 23
+E                    C2         12  4 0
+E                    C3         12  4 0
+E                    C4         12  4 0
+E                    C5         12  4 0
+E                    C6         12  4 0
+E                    C7         12  4 0
+E                    C8         12 18
+E                    C9         12  8 0
+E                    C10        12 24
+ISCREEN  AA  01   1 CS   2 C0   3 C1
+I                                        4   90PEDATE      70
+I        AB  02   1 CS   2 C0   3 C2
+I                                        4  51 C2
+I                                       52  99 C3
+I                                      100 147 C4
+I                                      148 195 C5
+I                                      196 243 C6
+I                                      244 291 C7
+I                                      292 507 C8
+I        AB  03   1 CS   2 C0   3 C3
+I                                        4   4 ANS
+I        AD  09
+IPRMAST  NS
+I                                        1   20ECO
+I                                        3   80ENUM
+I                                        1   40ELOC
+I                                        1   80EKEY8
+I                                        9  120EDEPT
+I                                       13  28 ENAME
+I                                       13  36 ENAMEX
+I                                       37  60 EADDR1
+I                                       60  84 EADDR2
+I                                       85  86 ESTATE
+I                                       87  96 EZIP
+I                                    P  97  980EAREA
+I                                    P  99 1020EPHONE
+I                                      103 113 ESS
+I                                      114 114 EMS
+I                                      115 1150ERACE
+I                                      116 116 ESEX
+I                                      117 1220EHDATE
+I                                      123 1280ETDATE
+I                                      129 144 EREAS
+I                                      145 1500EBDATE
+I                                      151 1560ERDATE
+I                                      157 1570ESTA
+I                                      158 1580EPAY
+I                                    P 159 1624ERATE
+I                                    P 163 1672ESAL
+I                                    P 168 1712EFADD
+I                                    P 172 1752ESADD
+I                                    P 176 1792ECADD
+I                                      180 1810EFEXP
+I                                      182 1830ESEXP
+I                                      184 1850ECEXP
+I                                      186 187 ESCD
+I                                      186 186 ESCD1
+I                                      188 1890ECCD
+I                                      190 1900EMEALS
+I                                      191 1910ETIPS
+I                                      192 207 ECD
+I                                      208 223 EF
+I                                    P 224 255 EDD
+I                                    P 256 287 EBAL
+I                                    P 378 3790EQWK
+I                                    P 380 469 EYTD
+I                                    P 470 4710EYWK
+I                                      512 512 EDEL
+IPRTRAN  NS
+I                                       15  180THOUR1
+I                                       19  220THOUR2
+I                                       23  260THOUR3
+I                                       27  300THOUR4
+I                                       31  340THOUR5
+I                                       35  380THOUR6
+I                                       39  56 TCOMM
+I                                       57  80 TNAME
+IPRTR    NS
+I                                        1   20ECO
+I                                        3   80ENUM
+I                                        9  140TDATE
+I                                       15  180THOUR1
+I                                       19  220THOUR2
+I                                       23  260THOUR3
+I                                       27  300THOUR4
+I                                       31  340THOUR5
+I                                       35  380THOUR6
+I                                       39  56 TCOMM
+I                                       57  80 TNAME
+IGLDEPT  NS
+I                                        5  28 DDESC
+I           UDS
+I                                        1   1 FNAME
+I                                        2   30CO
+I                                        4  11 USER
+I                                       12  14 BLANK
+I                                       15  16 WSID
+I                                        4  16 HEADER
+I                                       17  200TIMEX
+I                                       21  260DDATE
+I                                      101 150 HDR1
+I                                      151 200 HDR2
+C   KG                GOTO END                          E.O.J.
+C                     TIME           TIMEY   60
+C                     MOVELTIMEY     TIMEX
+C*
+C                     SETOF                     503055
+C                     SETOF                     404142
+C                     SETOF                     43
+C*
+C*  KA - RETRY    04 - START UP SCREEN
+C*
+C*
+C*
+C   09
+COR KA                EXSR START
+C   09
+COR KA                GOTO END
+C*
+C   01                EXSR CHECK
+C   02                EXSR WRITE
+C   02 88             EXSR START
+C   02N88             EXSR CHECK
+C*
+C   03 88             EXSR START
+C   03N88             EXSR CHECK
+C           END       TAG
+C*
+CSR         START     BEGSR
+CSR                   SETON                     21
+CSR                   EXCPT
+CSR                   SETOF                     21
+CSR                   SETON                     51
+CSR                   ENDSR
+C*
+CSR         CHECK     BEGSR
+C*
+CSR                   MOVE *BLANKS   C1
+CSR                   Z-ADD0         C2
+CSR                   Z-ADD0         C3
+CSR                   Z-ADD0         C4
+CSR                   Z-ADD0         C5
+CSR                   Z-ADD0         C6
+CSR                   Z-ADD0         C7
+CSR                   MOVE *BLANKS   LNAME  40
+CSR                   MOVE *BLANKS   C8
+CSR                   Z-ADD0         C9
+CSR                   MOVE *BLANKS   C10
+CSR                   Z-ADD01        CORP    20
+CSR                   MOVEL01        KEY4    40
+CSR                   Z-ADD0         FROM    60
+CSR                   Z-ADD1999      TO      60
+CSR U6                Z-ADD299       TO      60
+CSR                   MOVE 01        KEY4
+CSR U1                Z-ADD3000      FROM    60
+CSR U1                Z-ADD3999      TO      60
+CSR U1                MOVE 02        KEY4
+CSR U2                Z-ADD4000      FROM    60
+CSR U2                Z-ADD4999      TO      60
+CSR U2                MOVE 04        KEY4
+CSR U3                Z-ADD5000      FROM    60
+CSR U3                Z-ADD5999      TO      60
+CSR U3                MOVE 05        KEY4
+CSR                   MOVELCORP      KEY8    80
+CSR                   MOVE FROM      KEY8
+CSR 01      KEY8      SETLLPRMAST
+CSR 01      KEY4      CHAINGLDEPT               11
+CSR 01                MOVELDDESC
+CSR                   Z-ADD1         X       20
+CSR         RLOOP     TAG
+CSR                   SETOF                     88
+CSR                   READ PRMAST                   88
+CSRN88      ECO       COMP CORP                 8888
+CSRN88      ENUM      COMP TO                   88
+CSRN88 U6   ENUM      COMP 100                      11
+CSRN88 U6 11          GOTO RLOOP
+CSR 88                GOTO OUT01
+CSR U6      ENUM      COMP 100                      11
+CSR U6 11             GOTO RLOOP
+CSR U4      ENUM      COMP 300                    11
+CSR U4 11   ENUM      COMP 100                  1111
+CSR U4 11             GOTO RLOOP
+CSR         ESTA      COMP 0                        11
+CSR   N11   ESTA      COMP 9                        11
+CSR    70             SETOF                         11
+CSRNU5N11   ERATE     COMP 0                        11
+CSR U5N11   EPAY      COMP 3                    1111
+CSR    11             GOTO RLOOP
+CSR                   MOVELENUM      C1,X
+CSR                   MOVE ENAME     C1,X
+CSR                   MOVELCORP      C9,X
+CSR                   MOVE ENUM      C9,X
+CSR                   MOVELC9,X      KEY14  14
+CSR         PEDATE    MULT 10000.01  PEDATX  60
+CSR                   MOVE PEDATX    KEY14
+CSR 70      KEY14     CHAINPRTR                 11
+CSR 70 11             GOTO RLOOP
+CSRN70      C9,X      CHAINPRTRAN               11
+CSRN11                Z-ADDTHOUR1    C2,X
+CSRN11                Z-ADDTHOUR2    C3,X
+CSRN11                Z-ADDTHOUR3    C4,X
+CSRN11                Z-ADDTHOUR4    C5,X
+CSRN11                Z-ADDTHOUR5    C6,X
+CSRN11                Z-ADDTHOUR6    C7,X
+CSRN11                MOVE TCOMM     C8,X
+CSR                   MOVELENAMEX    C10,X
+CSR         X         COMP 12                       11
+CSRN11                ADD  1         X
+CSRN11                GOTO RLOOP
+C*
+CSR         OUT01     TAG
+CSR                   SETOF                     11
+CSR 88      X         COMP 1                        11
+CSR 88 11             EXSR START
+CSRN11N70             SETON                     18
+CSRN11 70             SETON                     19
+CSRN11                EXCPT
+CSR                   SETOF                     1819
+C*
+CSR         ENDCK     ENDSR
+C********** WRITE RECORDS **************
+CSR         WRITE     BEGSR                            NEW RECORD
+CSR                   Z-ADD1         X
+CSR         WLOOP     TAG
+CSR                   MOVE C9,X      KEY8
+CSR         C9,X      COMP 0                        11
+CSRN11      KEY8      CHAINPRTRAN               24
+CSRN24N11             SETON                     25
+CSRN11                EXCPT
+CSR                   SETOF                     2425
+CSR         X         COMP 12                       11
+CSRN11                ADD  1         X
+CSRN11                GOTO WLOOP
+CSR                   ENDSR
+C*
+C*
+OSCREEN  E        21
+O                                   K8 'PR005001'
+O                         UDATE Y    8
+O                         HDR1      58
+O                         TIMEX     63 '  .  '
+O                         HDR2     113
+O                         PEDATE   119
+O        E        18
+O                                   K8 'PR005002'
+O                         UDATE Y    8
+O                         HDR1      58
+O                         TIMEX     63 '  .  '
+O                         HDR2     113
+O                         CORP     115
+O                         LNAME    155
+O                         C1       431
+O                         C2       479 '    '
+O                         C3       527 '    '
+O                         C4       575 '    '
+O                         C5       623 '    '
+O                         C6       671 '    '
+O                         C7       719 '    '
+O                         C8       935
+O                 U5               946 '9999 NO PAY'
+O        E        19
+O                                   K8 'PR005003'
+O                         UDATE Y    8
+O                         HDR1      58
+O                         TIMEX     63 '  .  '
+O                         HDR2     113
+O                         CORP     115
+O                         LNAME    155
+O                         C1       431
+O                         C2       479 '    '
+O                         C3       527 '    '
+O                         C4       575 '    '
+O                         C5       623 '    '
+O                         C6       671 '    '
+O                         C7       719 '    '
+O                         C8       935
+O                 U5               946 '9999 NO PAY'
+OPRTRAN  EADD     24
+O                         KEY8       8
+O                         PEDATE    14
+O                         C2,X      18
+O                         C3,X      22
+O                         C4,X      26
+O                         C5,X      30
+O                         C6,X      34
+O                         C7,X      38
+O                         C8,X      56
+O                         C10,X     80
+O        E        25
+O                         PEDATE    14
+O                         C2,X      18
+O                         C3,X      22
+O                         C4,X      26
+O                         C5,X      30
+O                         C6,X      34
+O                         C7,X      38
+O                         C8,X      56
+O                         C10,X     80
+O*
+O*  AVOID SECTOR LOCKOUT
+O*
+O        E        18
