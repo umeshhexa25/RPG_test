@@ -1,0 +1,73 @@
+A          R PR000101
+A                                      CF03
+A                                      CF12
+A            CO            2  0B  4 10
+A            CONAME       30A     4 20
+A            EMPNO         6  0B  6 10
+A            EMPNAME      30A     6 25
+A            MSG          40A     9 10
+
+A          R PR000102
+A                                      CF03
+A                                      CF12
+A            DEPT          4  0B  4 10
+A            DEPTDESC     30A     4 20
+A            LOC           3  0B  5 10
+A            LOCDESC      30A     5 20
+
+A          R PR000103
+A                                      CF03
+A                                      CF12
+A            HDATE         6  0B  4 10
+A            BDATE         6  0B  5 10
+A            PAYRATE      11  2B  6 10
+A            PAYTYPE       1A B  7 10
+
+A          R PR000104
+A                                      CF03
+A                                      CF12
+A            CD01          2  0B  4 10
+A            CD02          2  0B  4 20
+A            CD03          2  0B  4 30
+A            CD04          2  0B  4 40
+A            CD05          2  0B  5 10
+A            CD06          2  0B  5 20
+A            CD07          2  0B  5 30
+A            CD08          2  0B  5 40
+
+A          R PR000101
+A                                      CF03
+A                                      CF12
+A            CO            2  0B  4 10
+A            CONAME       30A     4 20
+A            EMPNO         6  0B  6 10
+A            EMPNAME      30A     6 25
+A            MSG          40A     9 10
+
+A          R PR000102
+A                                      CF03
+A                                      CF12
+A            DEPT          4  0B  4 10
+A            DEPTDESC     30A     4 20
+A            LOC           3  0B  5 10
+A            LOCDESC      30A     5 20
+
+A          R PR000103
+A                                      CF03
+A                                      CF12
+A            HDATE         6  0B  4 10
+A            BDATE         6  0B  5 10
+A            PAYRATE      11  2B  6 10
+A            PAYTYPE       1A B  7 10
+
+A          R PR000104
+A                                      CF03
+A                                      CF12
+A            CD01          2  0B  4 10
+A            CD02          2  0B  4 20
+A            CD03          2  0B  4 30
+A            CD04          2  0B  4 40
+A            CD05          2  0B  5 10
+A            CD06          2  0B  5 20
+A            CD07          2  0B  5 30
+A            CD08          2  0B  5 40
