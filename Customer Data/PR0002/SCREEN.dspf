@@ -1,0 +1,17 @@
+A          R PR000201
+A                                      CF03
+A                                      CF12
+A            CO            2  0B  4 10
+A            CONAME       30A     4 20
+A            CODE          2  0B  6 10
+A            MSG          40A     9 10
+
+A          R PR000202
+A                                      CF03
+A                                      CF12
+A            DESCR        30A B  4 10
+A            TYPE          1A B  5 10
+A            RATE         11  2B  6 10
+A            GLACCT        6  0B  7 10
+A            DELFLG        1A B  8 10
+
