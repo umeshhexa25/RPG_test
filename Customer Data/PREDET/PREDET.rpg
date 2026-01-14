@@ -1,1 +1,16 @@
-
+FPREDET  IP  F  64  64            DISK
+IPREDET  AE  01
+I                                        1
+I                                        9  140PEDATE
+I                                    P  15  182RATE
+I                                    P  19  222EAMT1
+I                                    P  23
+I                                    P  27
+I                                    P  31
+I                                    P  35
+I                                    P  39
+I                                    P  43
+I                                    P  47
+I                                       51  56 CHECK
+I                                       57  620CKDAT
+     I                                       64  64 DEL
