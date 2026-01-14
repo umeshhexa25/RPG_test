@@ -1,0 +1,5 @@
+A          R GLCORPR
+A            CO            2  0
+A            CONAME       30A
+A            STATUS        1A
+A          K CO

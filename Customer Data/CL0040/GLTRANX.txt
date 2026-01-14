@@ -1,0 +1,12 @@
+A          R GLTRANXR
+A            CO            2  0
+A            ACCTNO        6  0
+A            SEQNO         4  0
+A            TRNDATE       6  0
+A            TRNDESC      25A
+A            DEBIT        11  2
+A            CREDIT       11  2
+A            DELFLG        1A
+A          K CO
+A          K ACCTNO
+A          K SEQNO
