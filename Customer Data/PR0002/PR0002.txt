@@ -1,0 +1,157 @@
+H 64 P 64                      B
+F*
+F*  ADD / UPDATE EARNINGS & DEDUCTIONS
+F*
+FSCREEN  CP  F     800            WORKSTN
+FCORP    IC  F10241024R 2AI     1 DISK
+FPREARN  UC  F 640 640R 2AI     1 DISK                      A
+E                    DESC       12 16
+E                    TYPE       12  1 0
+E                    RATE       12  5 2
+E                    DDESC      12 16
+E                    DTYPE      12  1 0
+E                    GL         12  8 0
+E                    PDESC      12 16
+E                    PTYPE      12  1 0
+E                    PRATE      12  5 2
+E                    PDDESC     12 16
+E                    PDTYPE     12  1 0
+E                    PGL        12  8 0
+ISCREEN  AA  01   1 CS   2 C0   3 C1
+I                                        4   50CO
+I        AB  02   1 CS   2 C0   3 C2
+I                                        4 195 DESC
+I                                      196 255 RATE
+I                                      256 267 TYPE
+I                                      268 459 DDESC
+I                                      460 471 DTYPE
+I                                      472 567 GL
+I                                      568 568 DEL
+I        AD  04
+IPREARN  AA
+I                                        3 194 PDESC
+I                                    P 195 230 PRATE
+I                                      231 242 PTYPE
+I                                      243 434 PDDESC
+I                                      435 446 PDTYPE
+I                                      447 542 PGL
+I                                      640 640 PDEL
+ICORP    AA
+I                                        3  32 CCNAME
+I           UDS
+I                                        1   1 FNAME
+I                                        2   30CO
+I                                        4  11 USER
+I                                       12  14 BLANK
+I                                       15  16 WSID
+I                                        4  16 HEADER
+I                                       17  200TIMEX
+I                                       21  260DDATE
+I                                      101 150 HDR1
+I                                      151 200 HDR2
+C   KG                GOTO END                          E.O.J.
+C*
+C                     SETOF                     50
+C*
+C*  KA - RETRY    04 - START UP SCREEN
+C*
+C*
+C*
+C   04
+COR KA                EXSR START
+C   04
+COR KA                GOTO END
+C*
+C   01                EXSR CHECK
+C   02                EXSR CHECK2
+C   02N50             EXSR WRITE
+C*
+C           END       TAG
+C*
+CSR         START     BEGSR
+CSR                   SETON                     21
+CSR                   EXCPT
+CSR                   SETOF                     21
+CSR                   ENDSR
+C*
+CSR         CHECK     BEGSR
+C*
+CSR         CO        COMP 0                        50
+C  N50      CO        CHAINCORP                 11
+CSR 50                SETON                     21
+CSRN50      CO        CHAINPREARN               18
+CSRN18N50             SETON                     19
+CSRN50                SETON                     18
+C*
+CSR                   EXCPT
+CSR                   SETOF                     181921
+C*
+CSR         ENDCK     ENDSR
+C***********CHECK SCREEN 2
+CSR         CHECK2    BEGSR
+CSR         DEL       COMP ' '                  5050
+CSR 50      DEL       COMP 'D'                  5050
+CSR 50 02             SETON                     18
+CSR 50                EXCPT
+CSR                   SETOF                     18  19
+CSR                   ENDSR
+C********** WRITE RECORDS **************
+CSR         WRITE     BEGSR                            NEW RECORD
+CSR         CO        CHAINPREARN               24
+CSRN24                SETON                     25
+CSR                   EXCPT
+CSR                   SETOF                     2425
+CSR                   EXSR START
+CSR                   ENDSR
+C*
+OSCREEN  E        21
+O                                   K8 'PR000201'
+O                         UDATE Y    8
+O                         HDR1      58
+O                         TIMEX     63 '  .  '
+O                         HDR2     113
+O                    50   CO       115
+O        E        18
+O                                   K8 'PR000202'
+O                         UDATE Y    8
+O                         HDR1      58
+O                         TIMEX     63 '  .  '
+O                         HDR2     113
+O                         CO       115
+O                         CCNAME   155
+O                 19N50   PDESC    347
+O                 19N50   PRATE    407 '     '
+O                 19N50   PTYPE    419 ' '
+O                 19N50   PDDESC   611
+O                 19N50   PDTYPE   623 ' '
+O                 19N50   PGL      719 '        '
+O                 19N50   PDEL     720
+O                 50      DESC     347
+O                 50      RATE     407 '     '
+O                 50      TYPE     419 ' '
+O                 50      DDESC    611
+O                 50      DTYPE    623 ' '
+O                 50      GL       719 '        '
+O                 50      DEL      720
+O        DR       KG
+O*
+OPREARN  EADD     24
+O                         CO         2
+O                         DESC     194
+O                         RATE     230P
+O                         TYPE     242
+O                         DDESC    434
+O                         DTYPE    446
+O                         GL       542
+O        E        25
+O                         DESC     194
+O                         RATE     230P
+O                         TYPE     242
+O                         DDESC    434
+O                         DTYPE    446
+O                         GL       542
+O                         DEL      640
+O*
+O*  AVOID SECTOR LOCKOUT
+O*
+O        E        19

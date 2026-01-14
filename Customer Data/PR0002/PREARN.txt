@@ -1,0 +1,10 @@
+A          R PREARNR
+A            CO            2  0
+A            CODE          2  0
+A            DESCR        30A
+A            TYPE          1A
+A            RATE         11  2
+A            GLACCT        6  0
+A            DELFLG        1A
+A          K CO
+A          K CODE
