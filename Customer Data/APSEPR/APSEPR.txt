@@ -1,0 +1,63 @@
+H     022
+F*
+F*  SPLIT APOPEN & APMONTH TO CURRENT & FUTURE FILES
+F*
+FSCREEN  ID  F  40  40            KEYBORD
+FAPOPEN  IP  F3840 128 17AI     1 DISK
+FAPMONTH IS  F3840 128            DISK
+FAPOPENC O   F3840 128 17AI     1 DISK                      U
+FAPOPENF O   F3840 128 17AI     1 DISK                      U
+FAPMONTHCO   F3840 128            DISK
+FAPMONTHFO   F3840 128            DISK
+E                    MSG     1   2 40
+IAPOPEN  NS  01 128NCD
+I                                      123 1260YRMOIN
+I                                        1 128 REC01
+I        NS  02
+IAPMONTH NS  03 128NCD
+I                                      123 1260YRMOIN
+I                                        1 128 REC03
+I        NS  04
+C*
+C   02
+COR 04                GOTO END
+C*
+C   99                GOTO JUMP
+C*
+C           ER01      TAG
+C           MSG,01    KEY01          MONTH   20
+C           MONTH     COMP 0                        51
+C  N51      MONTH     COMP 12                   51
+C   51                GOTO ER01
+C*
+C           ER02      TAG
+C           MSG,02    KEY01          YEAR    20
+C           YEAR      COMP 83                     52
+C   52                GOTO ER02
+C*
+C                     SETON                     99
+C*
+C*
+C           JUMP      TAG
+C*
+C                     MOVELYEAR      TEST4   40
+C                     MOVELMONTH     TEST4
+C           TEST4     COMP YRMOIN               71  71
+C*
+C   01 71             SETON                     U1
+C   01N71             SETON                     U2
+C   03 71             SETON                     U3
+C   03N71             SETON                     U4
+C*
+C           END       TAG
+OAPOPENC D        01 71
+O                         REC01    128
+O        D        01N71
+O                         REC01    128
+OAPMONTHCD        03 71
+O                         REC03    128
+O        D        03N71
+O                         REC03    128
+**  MSG
+ENTER MONTH BEING
+ENTER YEAR BEING
