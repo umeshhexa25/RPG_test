@@ -1,0 +1,10 @@
+A          R APMONTHCR
+A            VENDOR       6  0
+A            MON          2  0
+A            YR           2  0
+A            OPBAL       11  2
+A            TOTPAID     11  2
+A            ENDBAL      11  2
+A          K VENDOR
+A          K MON
+A          K YR

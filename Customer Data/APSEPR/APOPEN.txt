@@ -1,0 +1,11 @@
+A          R APOPENR
+A            VENDOR       6  0
+A            INVNO        6  0
+A            INVDATE      6  0
+A            DUEDATE      6  0
+A            INVAMT      11  2
+A            PAIDAMT     11  2
+A            STATUS       1A
+A            DELFLG       1A
+A          K VENDOR
+A          K INVNO

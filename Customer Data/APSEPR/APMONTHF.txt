@@ -1,0 +1,10 @@
+A          R APMONTHFR
+A            VENDOR       6  0
+A            MON          2  0
+A            YR           2  0
+A            PROJCHG     11  2
+A            PROJPAY     11  2
+A            PROJBAL     11  2
+A          K VENDOR
+A          K MON
+A          K YR
