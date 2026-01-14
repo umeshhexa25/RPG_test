@@ -1,0 +1,11 @@
+A          R PRTGLR
+A            CO            2  0
+A            PEDATE        6  0
+A            ACCTNO        6  0
+A            DEPT          4  0
+A            AMOUNT       11  2
+A            DRCR          1A
+A            SOURCE        3A
+A          K CO
+A          K PEDATE
+A          K ACCTNO

@@ -1,0 +1,10 @@
+A          R PRTTOTR
+A            CO            2  0
+A            PEDATE        6  0
+A            DEPT          4  0
+A            TOTGROSS     11  2
+A            TOTTAX       11  2
+A            TOTNET       11  2
+A          K CO
+A          K PEDATE
+A          K DEPT

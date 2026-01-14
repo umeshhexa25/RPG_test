@@ -1,0 +1,7 @@
+A          R PRDEPTR
+A            CO            2  0
+A            DEPT          4  0
+A            DEPTDESC     30A
+A            STATUS        1A
+A          K CO
+A          K DEPT

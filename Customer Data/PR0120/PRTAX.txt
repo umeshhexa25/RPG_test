@@ -1,0 +1,8 @@
+A          R PRTAXR
+A            CO            2  0
+A            TAXCD         2  0
+A            TAXDESC      30A
+A            RATE          7  4
+A            LIMIT        11  2
+A          K CO
+A          K TAXCD

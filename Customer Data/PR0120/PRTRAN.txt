@@ -1,0 +1,8 @@
+A          R PR006001
+A                                      CF03
+A                                      CF12
+A            CO            2  0B  4 10
+A            CONAME       30A     4 20
+A            PEDATE        6  0B  6 10
+A            MODE          1A B  7 10
+A            MSG          40A     9 10

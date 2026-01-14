@@ -1,0 +1,19 @@
+A          R PRMASTR
+A            CO            2  0
+A            EMPNO         6  0
+A            EMPNAME      30A
+A            LOC           3  0
+A            DEPT          4  0
+A            PAYRATE      11  2
+A            PAYTYPE       1A
+
+A            ECD01         2  0
+A            ECD02         2  0
+A            ECD03         2  0
+A            ECD04         2  0
+A            ECD05         2  0
+A            ECD06         2  0
+
+A            DELFLG        1A
+A          K CO
+A          K EMPNO
