@@ -1,0 +1,167 @@
+H    P                                 1
+F*
+F*  DETAILED EARNINGS REPORT
+F*
+FLIMITS  IR  F  16  16  8        ECONSOLE
+FPRMAST  IP  F 640 640L 8AI     1 DISK
+FPRLOC   IC  F  32  32R 4AI     1 DISK
+FPREDET  IF  F  64  64L14AI  EXTK DISK
+FPR0342  O   F 132 132     OF     PRINTER
+E    LIMITS  PRMAST
+E                    HDR     1   4 66
+E                    YTD        18  9 2
+E                    AMT        10  8 2
+E                    EAMT        8  7 2
+E                    SUB        10  9 2
+E                    TOT        10  9 2
+IPRMAST  AA  01
+I                                        1   20ECO   L2
+I                                        1   40LKEY  L1
+I                                        1   80ENUM
+I                                        3   80EMPNO
+I                                        9  120EDEPT
+I                                       13  32 ENAME
+I                                      116 116 ESEX
+I                                      158 1580EPAY
+I                                      192 207 ECD
+I                                      208 223 EF
+I                                    P 378 3790EQWK
+I                                    P 380 469 YTD
+I                                    P 470 4710EYWK
+I                                      512 512 EDEL
+I        AB  02
+IPRLOC   AE
+I                                        5  28 SNAME
+IPREDET  AE
+I                                        1
+I                                        9  140PEDATE
+I                                    P  15  182RATE
+I                                    P  19  50 EAMT
+I                                       51  56 CHECK
+C*
+I           UDS
+I                                        1   1 FNAME
+I                                        2   30CO
+I                                        4  11 USER
+I                                       12  14 BLANK
+I                                       15  16 WSID
+I                                        4  16 HEADER
+I                                       17  200TIMEX
+I                                       39  39 ONLY
+I                                      201
+I                                      207
+C******** CALCULATIONS *****************
+C   02                GOTO END
+C  N99                SETON                     98
+C   L2      PAGE      COMP 0                        11
+C   L2N11   ONLY      COMP 'Y'                  1111
+C   L2N11   PAGE      DIV  2         PAGE
+C   L2N11             MVR            XPAGE   10 12
+C   L2N11 12          EXCPTNEWPAG
+C   L2                Z-ADD0         PAGE
+C                     SETON                     99
+C   L1      LKEY      CHAINPRLOC                20
+C                     SETON                     70
+C                     MOVE *BLANKS   KEY14  14
+C                     MOVELENUM      KEY14
+C                     Z-ADD1         X       20
+C           KEY14     SETLLPREDET
+C           RLOOP     TAG
+C                     SETOF                     88
+C                     READ PREDET                   88
+C  N88      ENUM      COMP TNUM
+C   88                GOTO END
+C   L1N98             SETON                     98
+C           PEDATE    MULT 10000.01  HDATE   60
+C           HDATE     COMP DATE1                  11
+C  N11      HDATE     COMP DATE2                11
+C   11                GOTO
+C                     Z-ADDEAMT,1    AMT,1
+C                     Z-ADDEAMT,2    AMT,2
+C                     Z-ADDEAMT,3    AMT,3
+C                     Z-ADDEAMT,4    AMT,4
+C           ENUM      COMP 01000063                 11
+C   11                ADD  AMT,4     AMT,3
+C   11                Z-ADD0         AMT,4
+C           EAMT,3    ADD  EAMT,4    AMT,5
+C                     Z-ADDEAMT,5    AMT,6
+C                     Z-ADDEAMT,6    AMT,7
+C                     Z-ADDEAMT,7    AMT,8
+C                     Z-ADDEAMT,8    AMT,9
+C           AMT,5     SUB  AMT,6     AMT,10
+C                     SUB  AMT,7     AMT,10
+C                     SUB  AMT,8     AMT,10
+C                     SUB  AMT,9     AMT,10
+C                     ADD  AMT       SUB
+C   OF                SETON                     98
+C                     SETON                     71
+C                     EXCPT
+C                     SETOF                     707198
+C                     SETOF                     L1
+C                     ADD  1         X
+C                     GOTO RLOOP
+C           END       TAG
+C                     ADD  SUB       TOT
+C                     SETON                     72
+C   OF                SETON                     98
+C                     EXCPT
+C                     SETOF                     7298
+C*
+CL2
+OPR0342  E  102   98
+O                                    4 'DATE'
+O                         UDATE Y   13
+O                N20      SNAME     74
+0108EO                                  121 'PAGE '
+0109EO                         PAGE  Z  132
+O        E  1     98
+O                                    4 'TIME'
+O                         TIMEX     13 '  :  '
+O                                   74 'DETAILED EARNINGS REPORT'
+O                                  132 'PROGRAM - PR0342'
+O        E  2     98
+O                         HEADER    13
+O        E  1     70
+O                         EMPNO      6
+O                         ENAME     31
+O        E 12     70
+O                         HDR,01    66
+O                         HDR,02   132
+O        E  105
+O        E  1     71
+O                         X          2
+O                         CHECK      9
+O                         PEDATEY   18
+O                         RATE   B  27 '    0.  '
+O                         AMT    B 132 '      .  -'
+O        E 11     72
+O                                   27 'TOTALS'
+O                         SUB,1 JB  42
+O                         SUB,3 JB  62
+O                         SUB,5 JB  82
+O                         SUB,7 JB 102
+O                         SUB,9 JB 122
+O        E  1     72
+O                         SUB,2 JB  52
+O                         SUB,4 JB  72
+O                         SUB,6 JB  92
+O                         SUB,8 JB 112
+O                         SUB,10JB 132
+O        E 11             LRTOT
+O                                   27 'GRAND TOTALS'
+O                         TOT,1 JB  42
+O                         TOT,3 JB  62
+O                         TOT,5 JB  82
+O                         TOT,7 JB 102
+O                         TOT,9 JB 122
+O        E  1             LRTOT
+O                         TOT,2 JB  52
+O                         TOT,4 JB  72
+O                         TOT,6 JB  92
+O                         TOT,8 JB 112
+O                         TOT,10JB 132
+**  HDR
+WK CHECK#   DATE       RATE       REG HRS  O.T. HRS   REG PAY  O.T
+. PAY     GROSS   FEDERAL      FICA     LOCAL    DEDUCT       NET
+
+

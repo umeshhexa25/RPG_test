@@ -1,0 +1,23 @@
+A          R PRMASTR
+A            CO            2  0
+A            EMPNO         6  0
+A            EMPNAME      30A
+A            LOC           3  0
+A            PAYRATE      11  2
+A            PAYTYPE       1A
+
+A            CD01          2  0
+A            CD02          2  0
+A            CD03          2  0
+A            CD04          2  0
+A            CD05          2  0
+
+A            YTD01        11  2
+A            YTD02        11  2
+A            YTD03        11  2
+A            YTD04        11  2
+A            YTD05        11  2
+
+A            DELFLG        1A
+A          K CO
+A          K EMPNO

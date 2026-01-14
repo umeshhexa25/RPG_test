@@ -1,0 +1,8 @@
+A          R PR0342R
+A            EMPNO         6  0
+A            EMPNAME      30A
+A            CODE          2  0
+A            AMOUNT       11  2
+A            LIMIT        11  2
+A            PEDATE        6  0
+A            TEXT         30A

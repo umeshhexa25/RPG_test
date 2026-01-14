@@ -1,0 +1,13 @@
+A          R PREDETR
+A            CO            2  0
+A            EMPNO         6  0
+A            PEDATE        6  0
+A            CODE          2  0
+A            AMOUNT       11  2
+A            YTDAMT       11  2
+A            LIMHIT        1A
+A            LOC           3  0
+A          K CO
+A          K EMPNO
+A          K PEDATE
+A          K CODE
