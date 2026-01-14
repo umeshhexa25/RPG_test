@@ -1,1 +1,29 @@
+A          R OE000101
+A                                      CF03
+A                                      CF05
+A                                      CF12
+A            CO            2  0B  4 10
+A            CONAME       30A     4 20
+A            ORDNO         6  0B  6 10
+A            CUSTNO        6  0B  7 10
+A            MSG          40A     9 10
+
+A          R OE000102
+A                                      CF03
+A                                      CF05
+A                                      CF12
+A            LINENO        3  0B  4  5
+A            ITEMNO       10A B  4 10
+A            QTY           7  2B  4 25
+A            PRICE        11  2B  4 40
+A            EXTAMT       11  2O  4 55
+
+A          R OE000103
+A                                      CF03
+A                                      CF12
+A            LINENO        3  0O  5  5
+A            ITEMNO       10A O  5 10
+A            QTY           7  2O  5 25
+A            PRICE        11  2O  5 40
+A            EXTAMT       11  2O  5 55
 
