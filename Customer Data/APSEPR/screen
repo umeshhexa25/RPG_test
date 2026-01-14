@@ -1,1 +1,18 @@
+ A* Sample DDS for SCREEN display file
+     A          R SCREEN01                    /* Record format */
 
+     A                                      1  1' '  /* Control char position */
+     A            CO            2A  O  /* Control output field (2 chars) at row 1, col 2 */
+
+     A                                      2  1' '  /* Blank line for spacing */
+
+     A            MSG          40A  I  /* Message field (input) at row 3, col 1 */
+
+     A                                      4  1' '  /* Blank line */
+
+     A            INFIELD1     10A  B  5 5  /* Input field at row 5, col 5 */
+     A            INFIELD2     10A  B  6 5  /* Input field at row 6, col 5 */
+
+     A                                      7  1' '  /* Blank line */
+
+     A            CMD          8A  B  8 5  /* Command input field at row 8, col 5 */
