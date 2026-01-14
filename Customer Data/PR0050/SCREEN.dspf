@@ -1,0 +1,28 @@
+A          R PR005001
+A                                      CF03
+A                                      CF12
+A            CO            2  0B  4 10
+A            CONAME       30A     4 20
+A            PEDATE        6  0B  6 10
+A            MSG          40A     9 10
+
+A          R PR005002
+A                                      CF03
+A                                      CF12
+A            EMPNO         6  0B  4  5
+A            EMPNAME      20A     4 15
+A            DEPT          4  0B  4 40
+A            HOUR1         5  2B  5  5
+A            HOUR2         5  2B  5 15
+A            HOUR3         5  2B  5 25
+A            HOUR4         5  2B  5 35
+A            HOUR5         5  2B  5 45
+A            HOUR6         5  2B  5 55
+
+A          R PR005003
+A                                      CF03
+A                                      CF12
+A            EMPNO         6  0O  4  5
+A            TOTHR         7  2O  5 10
+A            STATUS        1A O  6 10
+
