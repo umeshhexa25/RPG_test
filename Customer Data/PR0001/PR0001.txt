@@ -1,0 +1,562 @@
+H064 P064                      B                                     PR0001
+F*                                                                   PR0001
+F*  ADD / UPDATE EMPLOYEES                                           PR0001
+F*                                                                   PR0001
+FSCREEN  CP  F     800            WORKSTN                            PR0001
+FCORP    IC  F10241024R 2AI     1 DISK                               PR0001
+FPRLOC   IC  F  32  32R 4AI     1 DISK                               PR0001
+FPREARN  IC  F 640 640R 2AI     1 DISK                               PR0001
+FPRMAST  UC  F 640 640R 8AI     1 DISK                      A        PR0001
+E                    CD          8  2 0                              PR0001
+E                    F           8  2 0                              PR0001
+E                    DED         8  7 2                              PR0001
+E                    BAL         8  7 2                              PR0001
+E                    QTD        18  9 2                              PR0001
+E                    YTD        18  9 2                              PR0001
+E                    ECD         8  2 0                              PR0001
+E                    EF          8  2 0                              PR0001
+E                    EDED        8  7 2                              PR0001
+E                    EBAL        8  7 2                              PR0001
+E                    EQTD       18  9 2                              PR0001
+E                    EYTD       18  9 2                              PR0001
+E                    DDES       12 19                                PR0001
+E                    PDDESC     12 16                                PR0001
+E                    DD          8 16                                PR0001
+ISCREEN  AA  01   1 CS   2 C0   3 C1                                 PR0001
+I                                        4   50CO                    PR0001
+I                                        4  110EMPNO                 PR0001
+I                                        4   70SCO                   PR0001
+I        AB  02   1 CS   2 C0   3 C2                                 PR0001
+I                                        4  27 NAME                  PR0001
+I                                       28  43 FIRST
+I                                       44  67 LAST
+I                                       68  91 ADDR1                 PR0001
+I                                       92 115 ADDR2                 PR0001
+I                                      116 117 STATE                 PR0001
+I                                      118 127 ZIP                   PR0001
+I                                      128 1300AREA                  PR0001
+I                                      131 1370PHONE                 PR0001
+I                                      138 148 SS                    PR0001
+I                                      149 1520DEPT                  PR0001
+I                                      153 153 MS                    PR0001
+I                                      154 1540RACE                  PR0001
+I                                      155 155 SEX                   PR0001
+I                                      156 1610HDATE                 PR0001
+I                                      162 1670REHIRE                PR0001
+I                                      168 1730BDATE                 PR0001
+I                                      174 1790RDATE                 PR0001
+I                                      180 1850TDATE                 PR0001
+I                                      186 201 REAS                  PR0001
+I                                      202 2020STATUS                PR0001
+I                                      203 2030PAY                   PR0001
+I                                        4 203 ERR1                  PR0001
+I                                      204 2104RATE                  PR0001
+I                                      211 2192SALARY                PR0001
+I                                      220 236 LIC
+I                                      237 237 VAL
+I                                      238 2410EXDATE
+I                                      242 242 ENDORS
+I                                      243 2492FADD                  PR0001
+I                                      250 2562SADD                  PR0001
+I                                      257 2632CADD                  PR0001
+I                                      264 2650FEXP                  PR0001
+I                                      266 2670SEXP                  PR0001
+I                                      267 2690CEXP                  PR0001
+I                                      270 2700MEALS                 PR0001
+I                                      271 2710TIPS                  PR0001
+I                                      272 273 SCD                   PR0001
+I                                      274 2750CCD                   PR0001
+I                                      276 284 BANK1
+I                                      285 301 ACCT1
+I                                      302 302 BTYP1
+I                                      303 303 DIR1
+I                                      304 3120BANK2
+I                                      313 329 ACCT2
+I                                      330 330 BTYP2
+I                                      331 331 DIR2
+I                                      204 331 ERR1A
+I        AB  03   1 CS   2 C0   3 C3                                 PR0001
+I                                        4  19 CD                    PR0001
+I                                       20  35 F                     PR0001
+I                                       36  91 DED                   PR0001
+I                                       92 147 BAL                   PR0001
+I                                      148 1522P401
+I                                      153 1612MWAGE
+I                                      162 1702M401WG
+I                                      171 1792EM401
+I                                      180 1882EY401
+I                                      189 1972ERM401
+I                                      198 2062ERY401
+I                                      207 208 INS1
+I                                      209 210 INS2
+I                                      148 210 ERR2
+I        AB  04   1 CS   2 C0   3 C4                                 PR0001
+I                                        4 165 QTD                   PR0001
+I                                      166 1680QWK                   PR0001
+I                                      169 330 YTD                   PR0001
+I                                      331 3330YWK                   PR0001
+I        AD  08                                                      PR0001
+IPRMAST  NS                                                          PR0001
+I                                        1   20ECO                   PR0001
+I                                        3   80ENUM                  PR0001
+I                                        3   80STORE                 PR0001
+I                                        9  120EDEPT                 PR0001
+I                                       13  36 ENAME                 PR0001
+I                                       37  60 EADDR1                PR0001
+I                                       61  84 EADDR2                PR0001
+I                                       85  86 ESTATE                PR0001
+I                                       87  96 EZIP                  PR0001
+I                                    P  97  980EAREA                 PR0001
+I                                    P  99 1020EPHONE                PR0001
+I                                      103 113 ESS                   PR0001
+I                                      114 114 EMS                   PR0001
+I                                      115 1150ERACE                 PR0001
+I                                      116 116 ESEX                  PR0001
+I                                      117 1220EHDATE                PR0001
+I                                      123 1280ETDATE                PR0001
+I                                      129 144 EREAS                 PR0001
+I                                      145 1500EBDATE                PR0001
+I                                      151 1560ERDATE                PR0001
+I                                      157 1570ESTAT                 PR0001
+I                                      158 1580EPAY                  PR0001
+I                                    P 159 1624ERATE                 PR0001
+I                                    P 163 1672ESAL                  PR0001
+I                                    P 168 1712EFADD                 PR0001
+I                                    P 172 1752ESADD                 PR0001
+I                                    P 176 1792ECADD                 PR0001
+I                                      180 1810EFEXP                 PR0001
+I                                      182 1830ESEXP                 PR0001
+I                                      184 1850ECEXP                 PR0001
+I                                      186 187 ESCD                  PR0001
+I                                      188 1890ECCD                  PR0001
+I                                      190 1900EMEALS                PR0001
+I                                      191 1910ETIPS                 PR0001
+I                                      192 207 ECD                   PR0001
+I                                      208 223 EF                    PR0001
+I                                    P 224 255 EDED                  PR0001
+I                                    P 256 287 EBAL                  PR0001
+I                                    P 288 377 EQTD                  PR0001
+I                                    P 378 3790EQWK                  PR0001
+I                                    P 380 469 EYTD                  PR0001
+I                                    P 470 4710EYWK                  PR0001
+I                                    P 472 4740EP401
+I                                    P 475 4792E401M
+I                                    P 480 4842E401Y
+I                                    P 485 4892EE401M
+I                                    P 490 4942EE401Y
+I                                    P 495 4992EMWAGE
+I                                    P 500 5042EM401W
+I                                      505 506 EINS1                 PR0001
+I                                      507 508 EINS2                 PR0001
+I                                      513 5210EBANK1
+I                                      522 538 EACCT1
+I                                      539 539 EBTYP1
+I                                      540 540 EDIR1
+I                                      541 5490EBANK2
+I                                      550 566 EACCT2
+I                                      567 567 EBTYP2
+I                                      568 568 EDIR2
+I                                      569 584 EFIRST
+I                                      585 608 ELAST
+I                                      610 626 ELIC
+I                                      627 627 EVAL
+I                                      628 6310EEXDTE
+I                                      632 632 EENDOR
+I                                      633 6380EREHIR
+IPREARN  AA                                                          PR0001
+I                                      243 434 PDDESC                PR0001
+ICORP    AA                                                          PR0001
+I                                        3  42 CONAME                PR0001
+IPRLOC   AA                                                          PR0001
+I                                        5  28 SDESC                 PR0001
+I           UDS                                                      PR0001
+I                                        1   1 FNAME                 PR0001
+I                                        4  11 USER                  PR0001
+I                                       12  14 BLANK                 PR0001
+I                                       15  16 WSID                  PR0001
+I                                        4  16 HEADER                PR0001
+I                                       17  200TIMEX                 PR0001
+I                                       21  260DDATE                 PR0001
+I                                       50  510CO
+I                                       50  530SCO
+I                                       50  570EMPNO
+I                                      101 150 HDR1                  PR0001
+I                                      151 200 HDR2                  PR0001
+C   KG                GOTO END                          E.O.J.       PR0001
+C*                                                                   PR0001
+C   KC                SETON                     U3
+C   KC                GOTO END
+C                     SETOF                     503031               PR0001
+C                     SETOF                     606162               PR0001
+C                     SETOF                     636465               PR0001
+C                     SETOF                     666733               PR0001
+C*                                                                   PR0001
+C*  KA - RETRY    04 - START UP SCREEN                               PR0001
+C*                                                                   PR0001
+C*                                                                   PR0001
+C*                                                                   PR0001
+C   U3                SETON                     01
+C   U3                SETOF                     08U3
+C   08                                                               PR0001
+COR KA                EXSR START                                     PR0001
+C   08                                                               PR0001
+COR KA                GOTO END                                       PR0001
+C*                                                                   PR0001
+C   01                EXSR CHECK                                     PR0001
+C   02                EXSR CHECK2                                    PR0001
+C   03                EXSR CHECK3                                    PR0001
+C   04N50             EXSR WRITE                                     PR0001
+C*                                                                   PR0001
+C           END       TAG                                            PR0001
+C*                                                                   PR0001
+CSR         START     BEGSR                                          PR0001
+CSR                   SETON                     21                   PR0001
+CSR                   EXCPT                                          PR0001
+CSR                   SETOF                     21                   PR0001
+CSR                   SETON                     51                   PR0001
+CSR                   ENDSR                                          PR0001
+C*                                                                   PR0001
+CSR         CHECK     BEGSR                                          PR0001
+CSR                   SETOF                     1819
+C*                                                                   PR0001
+CSR         SCO       COMP 0                        50               PR0001
+CSRN50      SCO       CHAINPRLOC                50                   PR0001
+CSR 50                SETON                     21                   PR0001
+CSRN50      EMPNO     CHAINPRMAST               18                   PR0001
+CSRN18N50             SETON                     19                   PR0001
+CSRN50                SETON                     18                   PR0001
+CSRN50      CO        CHAINCORP                 11                   PR0001
+CSRN50                EXSR RDED                                      PR0001
+CSRN50 19             MOVE ECD       CD                              PR0001
+CSRN50 19             EXSR MDED                                      PR0001
+C*                                                                   PR0001
+CSR                   EXCPT                                          PR0001
+CSR                   SETOF                     18  21               PR0001
+C*                                                                   PR0001
+CSR         ENDCK     ENDSR                                          PR0001
+C***********CHECK SCREEN 2                                           PR0001
+CSR         CHECK2    BEGSR                                          PR0001
+CSR         NAME      COMP ' '                      30               PR0001
+CSRN30      FIRST     COMP ' '                      30
+CSRN30      LAST      COMP ' '                      30
+CSR         MS        COMP 'M'                  3131                 PR0001
+CSR 31      MS        COMP 'S'                  3131                 PR0001
+CSR         SS        COMP ' '                      33               PR0001
+CSR 30                                                               PR0001
+COR 33                                                               PR0001
+COR 31                SETON                     50                   PR0001
+CSR 50 02             SETON                     18                   PR0001
+CSRN50 02             SETON                     16                   PR0001
+CSR                   EXCPT                                          PR0001
+CSR                   SETOF                     1816                 PR0001
+CSR                   ENDSR                                          PR0001
+C***********CHECK SCREEN 3                                           PR0001
+CSR         CHECK3    BEGSR                                          PR0001
+CSR                   MOVE *BLANKS   DD                              PR0001
+CSR                   EXSR MDED                                      PR0001
+CSR         CD,1      COMP 0                    60                   PR0001
+CSR 60      CD,1      COMP 12                   60                   PR0001
+CSR         CD,2      COMP 0                    6161                 PR0001
+CSR 61      CD,2      COMP 12                   61                   PR0001
+CSR         CD,3      COMP 0                    6262                 PR0001
+CSR 62      CD,3      COMP 12                   62                   PR0001
+CSR         CD,4      COMP 0                    6363                 PR0001
+CSR 63      CD,4      COMP 12                   63                   PR0001
+CSR         CD,5      COMP 0                    6464                 PR0001
+CSR 64      CD,5      COMP 12                   64                   PR0001
+CSR         CD,6      COMP 0                    65                   PR0001
+CSR 65      CD,6      COMP 12                   65                   PR0001
+CSR         CD,7      COMP 0                    66                   PR0001
+CSR 66      CD,7      COMP 12                   66                   PR0001
+CSR         CD,8      COMP 0                    67                   PR0001
+CSR 67      CD,8      COMP 12                   67                   PR0001
+CSR 60                                                               PR0001
+COR 61                                                               PR0001
+COR 62                                                               PR0001
+COR 63                                                               PR0001
+COR 64                                                               PR0001
+COR 65                SETON                     50                   PR0001
+CSR 66                                                               PR0001
+COR 67                SETON                     50                   PR0001
+CSR 50 03             SETON                     16                   PR0001
+CSRN50 03             SETON                     14                   PR0001
+CSR                   EXCPT                                          PR0001
+CSR                   SETOF                     141516               PR0001
+CSR                   ENDSR                                          PR0001
+C********** WRITE RECORDS **************                             PR0001
+CSR         WRITE     BEGSR                            NEW RECORD    PR0001
+CSR         EMPNO     CHAINPRMAST               24                   PR0001
+CSRN24                SETON                     25                   PR0001
+CSR                   EXCPT                                          PR0001
+CSR                   SETOF                     2425                 PR0001
+CSR                   EXSR START                                     PR0001
+CSR                   ENDSR                                          PR0001
+C*                                                                   PR0001
+C***********READ IN DEDUCTION CODES                                  PR0001
+CSR         RDED      BEGSR                                          PR0001
+CSR         CO        CHAINPREARN               11                   PR0001
+CSR                   MOVE PDDESC    DDES                            PR0001
+CSR                   Z-ADD1         X       20                      PR0001
+CSR         LOOP      TAG                                            PR0001
+CSR                   MOVELX         DDES,X                          PR0001
+CSR         X         COMP 12                       11               PR0001
+CSRN11                ADD  1         X                               PR0001
+CSRN11                GOTO LOOP                                      PR0001
+CSR                   ENDSR                                          PR0001
+C***********GET DEDUCTIONS ********                                  PR0001
+CSR         MDED      BEGSR                                          PR0001
+CSR                   MOVE *BLANKS   DD                              PR0001
+CSR                   Z-ADD1         X                               PR0001
+CSR         MLOOP     TAG                                            PR0001
+CSR         CD,X      COMP 0                        11               PR0001
+CSRN11      CD,X      COMP 12                   11
+CSRN11                Z-ADDCD,X      X1      20                      PR0001
+CSRN11                MOVE DDES,X1   DD,X                            PR0001
+CSR         X         COMP 8                        11               PR0001
+CSRN11                ADD  1         X                               PR0001
+CSRN11                GOTO MLOOP                                     PR0001
+CSR                   ENDSR                                          PR0001
+C*                                                                   PR0001
+OSCREEN  E        21                                                 PR0001
+O                                   K8 'PR000101'                    PR0001
+O                         UDATE Y    8                               PR0001
+O                         HDR1      58                               PR0001
+O                         TIMEX     63 '  .  '                       PR0001
+O                         HDR2     113                               PR0001
+O                 51      CO       115                               PR0001
+O                    50   EMPNO    121                               PR0001
+O        E        18                                                 PR0001
+O                                   K8 'PR000102'                    PR0001
+O                         UDATE Y    8                               PR0001
+O                         HDR1      58                               PR0001
+O                         TIMEX     63 '  .  '                       PR0001
+O                         HDR2     113                               PR0001
+O                         EMPNO    121                               PR0001
+O                 19N50   ENAME    145                               PR0001
+O                 19N50   EFIRST   161
+O                 19N50   ELAST    185
+O                 19N50   EADDR1   209                               PR0001
+O                 19N50   EADDR2   233                               PR0001
+O                 19N50   ESTATE   235                               PR0001
+O                 19N50   EZIP     245                               PR0001
+O                 19N50   EAREA Z  248                               PR0001
+O                 19N50   EPHONEZ  255                               PR0001
+O                 19N50   ESS      266                               PR0001
+O                 19N50   EDEPT Z  270                               PR0001
+O                 19N50   EMS      271                               PR0001
+O                 19N50   ERACE    272                               PR0001
+O                 19N50   ESEX     273                               PR0001
+O                 19N50   EHDATEZ  279                               PR0001
+O                 19N50   EREHIRZ  285                               PR0001
+O                 19N50   EBDATEZ  291                               PR0001
+O                 19N50   ERDATEZ  297                               PR0001
+O                 19N50   ETDATEZ  303                               PR0001
+O                 19N50   EREAS    319                               PR0001
+O                 19N50   ESTAT    320                               PR0001
+O                 19N50   EPAY     321                               PR0001
+O                 19N50   ERATE Z  328                               PR0001
+O                 19N50   ESAL  Z  337                               PR0001
+O                 19N50   ELIC     354
+O                 19N50   EVAL     355
+O                 19N50   EEXDTEZ  359
+O                 19N50   EENDOR   360
+O                 19N50   EFADD Z  367                               PR0001
+O                 19N50   ESADD Z  374                               PR0001
+O                 19N50   ECADD Z  381                               PR0001
+O                 19N50   EFEXP Z  383                               PR0001
+O                 19N50   ESEXP Z  385                               PR0001
+O                 19N50   ECEXP Z  387                               PR0001
+O                 19N50   EMEALSZ  388                               PR0001
+O                 19N50   ETIPS Z  389                               PR0001
+O                 19N50   ESCD     391                               PR0001
+O                 19N50   ECCD  Z  393                               PR0001
+O                 19N50   EBANK1Z  402
+O                 19N50   EACCT1   419
+O                 19N50   EBTYP1   420
+O                 19N50   EDIR1    421
+O                 19N50   EBANK2Z  430
+O                 19N50   EACCT2   447
+O                 19N50   EBTYP2   448
+O                 19N50   EDIR2    449
+O                 50      ERR1     321                               PR0001
+O                 50      ERR1A    449
+O        E        16                                                 PR0001
+O                                   K8 'PR000103'                    PR0001
+O                         UDATE Y    8                               PR0001
+O                         HDR1      58                               PR0001
+O                         TIMEX     63 '  .  '                       PR0001
+O                         HDR2     113                               PR0001
+O                         EMPNO    121                               PR0001
+O                         NAME     145                               PR0001
+O                 19N50   ECD      161 '  '                          PR0001
+O                 19N50   DD       289                               PR0001
+O                 19N50   EF       305 '  '                          PR0001
+O                 19N50   EDED     361                               PR0001
+O                 19N50   EBAL     417                               PR0001
+O                         DDES     645                               PR0001
+O                 19N50   EP401 Z  650
+O                 19N50   EMWAGE   659
+O                 19N50   EM401W   668
+O                 19N50   E401M    677
+O                 19N50   E401Y    686
+O                 19N50   EE401M   695
+O                 19N50   EE401Y   704
+O                 19N50   EINS1    706
+O                 19N50   EINS2    708
+O                 50      CD       161 '  '                          PR0001
+O                 50      DD       389                               PR0001
+O                 50      F        305 '  '                          PR0001
+O                 50      DED      361                               PR0001
+O                 50      BAL      417                               PR0001
+O                 50      ERR2     708
+O        E        14                                                 PR0001
+O                                   K8 'PR000104'                    PR0001
+O                         UDATE Y    8                               PR0001
+O                         HDR1      58                               PR0001
+O                         TIMEX     63 '  .  '                       PR0001
+O                         HDR2     113                               PR0001
+O                         EMPNO    121                               PR0001
+O                         NAME     145                               PR0001
+O                 19N50   EQTD     307                               PR0001
+O                 19N50   EQWK     310                               PR0001
+O                 19N50   EYTD     472                               PR0001
+O                 19N50   EYWK     475                               PR0001
+O                 50      QTD      307                               PR0001
+O                 50      QWK      309                               PR0001
+O                 50      YTD      472                               PR0001
+O                 50      YWK      474                               PR0001
+O        DR       KG                                                 PR0001
+O*                                                                   PR0001
+OPRMAST  EADD     24                                                 PR0001
+O                         EMPNO      8                               PR0001
+O                         DEPT      12                               PR0001
+O                         NAME      36                               PR0001
+O                         ADDR1     60                               PR0001
+O                         ADDR2     84                               PR0001
+O                         STATE     86                               PR0001
+O                         ZIP       96                               PR0001
+O                         AREA      98P                              PR0001
+O                         PHONE    102P                              PR0001
+O                         SS       113                               PR0001
+O                         MS       114                               PR0001
+O                         RACE     115                               PR0001
+O                         SEX      116                               PR0001
+O                         HDATE    122                               PR0001
+O                         TDATE    128                               PR0001
+O                         REAS     144                               PR0001
+O                         BDATE    150                               PR0001
+O                         RDATE    156                               PR0001
+O                         STATUS   157                               PR0001
+O                         PAY      158                               PR0001
+O                         RATE     162P                              PR0001
+O                         SALARY   167P                              PR0001
+O                         FADD     171P                              PR0001
+O                         SADD     175P                              PR0001
+O                         CADD     179P                              PR0001
+O                         FEXP     181                               PR0001
+O                         SEXP     183                               PR0001
+O                         CEXP     185                               PR0001
+O                         SCD      187                               PR0001
+O                         CCD      189                               PR0001
+O                         MEALS    190                               PR0001
+O                         TIPS     191                               PR0001
+O                         CD       207                               PR0001
+O                         F        223                               PR0001
+O                         DED      255P                              PR0001
+O                         BAL      287P                              PR0001
+O                         QTD      377P                              PR0001
+O                         QWK      379P                              PR0001
+O                         YTD      469P                              PR0001
+O                         YWK      471P                              PR0001
+O                         P401     474P
+O                         EM401    479P
+O                         EY401    484P
+O                         ERM401   489P
+O                         ERY401   494P
+O                         MWAGE    499P
+O                         M401WG   504P
+O                         INS1     506
+O                         INS2     508
+O                         ACCT1    538
+O                         BTYP1    539
+O                         DIR1     540
+O                         BANK2    549
+O                         ACCT2    566
+O                         BTYP2    567
+O                         DIR2     568
+O                         FIRST    584
+O                         LAST     608
+O                         LIC      626
+O                         VAL      627
+O                         EXDATE   631
+O                         ENDORS   632
+O                         REHIRE   638
+O        E        25                                                 PR0001
+O                         EMPNO      8                               PR0001
+O                         DEPT      12                               PR0001
+O                         NAME      36                               PR0001
+O                         ADDR1     60                               PR0001
+O                         ADDR2     84                               PR0001
+O                         STATE     86                               PR0001
+O                         ZIP       96                               PR0001
+O                         AREA      98P                              PR0001
+O                         PHONE    102P                              PR0001
+O                         SS       113                               PR0001
+O                         MS       114                               PR0001
+O                         RACE     115                               PR0001
+O                         SEX      116                               PR0001
+O                         HDATE    122                               PR0001
+O                         TDATE    128                               PR0001
+O                         REAS     144                               PR0001
+O                         BDATE    150                               PR0001
+O                         RDATE    156                               PR0001
+O                         STATUS   157                               PR0001
+O                         PAY      158                               PR0001
+O                         RATE     162P                              PR0001
+O                         SALARY   167P                              PR0001
+O                         FADD     171P                              PR0001
+O                         SADD     175P                              PR0001
+O                         CADD     179P                              PR0001
+O                         FEXP     181                               PR0001
+O                         SEXP     183                               PR0001
+O                         CEXP     185                               PR0001
+O                         SCD      187                               PR0001
+O                         CCD      189                               PR0001
+O                         MEALS    190                               PR0001
+O                         TIPS     191                               PR0001
+O                         CD       207                               PR0001
+O                         F        223                               PR0001
+O                         DED      255P                              PR0001
+O                         BAL      287P                              PR0001
+O                         QTD      377P                              PR0001
+O                         QWK      379P                              PR0001
+O                         YTD      469P                              PR0001
+O                         YWK      471P                              PR0001
+O                         P401     474P
+O                         EM401    479P
+O                         EY401    484P
+O                         ERM401   489P
+O                         ERY401   494P
+O                         MWAGE    499P
+O                         M401WG   504P
+O                         INS1     506
+O                         INS2     508
+O                         BANK1    521
+O                         ACCT1    538
+O                         BTYP1    539
+O                         DIR1     540
+O                         BANK2    549
+O                         ACCT2    566
+O                         BTYP2    567
+O                         DIR2     568
+O                         FIRST    584
+O                         LAST     608
+O                         LIC      626
+O                         VAL      627
+O                         EXDATE   631
+O                         ENDORS   632
+O                         REHIRE   638
+O*                                                                   PR0001
+O*  AVOID SECTOR LOCKOUT                                             PR0001
+O*                                                                   PR0001
+O        E        19                                                 PR0001
