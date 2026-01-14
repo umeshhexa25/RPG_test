@@ -1,0 +1,11 @@
+A          R LIMITSR
+A            CO            2  0
+A            CODE          2  0
+A            LIMTYPE       1A
+A            PERLIMIT     11  2
+A            YTDLIMIT     11  2
+A            RESET        1A
+A            STATUS        1A
+A          K CO
+A          K CODE
+
