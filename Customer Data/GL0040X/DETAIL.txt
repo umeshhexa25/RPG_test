@@ -1,0 +1,13 @@
+A          R DETAILR
+A            CO            2  0
+A            ORDNO         6  0
+A            LINENO        3  0
+A            ITEMNO       10A
+A            QTY           7  2
+A            PRICE        11  2
+A            EXTAMT       11  2
+A            STATUS        1A
+A            GLACCT        6  0
+A          K CO
+A          K ORDNO
+A          K LINENO

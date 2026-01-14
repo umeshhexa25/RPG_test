@@ -1,0 +1,1152 @@
+H      64                      B
+F*
+F*  GENERAL LEDGER DETAIL INPUT
+F*
+F*   01 = START UP SCREEN
+F*   02 = ITEM ENTRY SCREEN
+F*
+FSCREEN  CP  F    3000            WORKSTN
+FGLCORP  UC  F 256 256R 2AI     1 DISK
+FGLMAST  IC  F 300 300R 7AI     1 DISK
+FDETAIL  UC  F 256 256R 5AI     1 DISK                      A
+FDETAILD UD  F 512 256L 5AI     1 DISK
+E                    DT          5  6 0
+E                    PR          5  7 4
+E                    S5A        10  2
+E                    S5B        10 24
+E                    S5C        10 20
+E                    S10A       10 30
+E                    S10B       10 30
+E                    S10C       10  7
+E                    S11C       10  6
+E                    L         250  3 0                              GL0040LINE
+E                    Q         250  6 0                              GL0040 QTY
+E                    I         250 20                                GL0040 ITEM #
+E                    DSI       250 24                                GL0040DESCRIPTION
+E                    PKI       250  3                                GL0040UNIT OF
+E                    P         250  9 2                              GL0040
+E                    TII       250  1                                GL0040SUB FROM INV Y/N
+E                    NCI       250  1                                GL0040 NO CHARGE Y/N
+E                    C         250  9 2
+E                    CT#        10  2 0
+E                    OH         10  6 0
+E*
+E                    LIN         8  3 0
+E                    QTY         8  6 0
+E                    ITM         8 20
+E                    DSC         8 24
+E                    PKG         8  3
+E                    UPR         8  9 2
+E                    TOI         8  1
+E                    TON         8  1
+E                    CST         8  9 2
+E*
+E*  OPEN ORDER ARRAYS
+E*
+E                    OOR        11  5 0
+E                    OQY        11  5 0
+E                    ODT        11  8
+E                    TYP        11  7
+ISCREEN  AA  01   1 CS   2 C0   3 C1
+I                                        4   5 COMPIN
+I                                        6  12 CUSTIN
+I                                        6  120CUSTXX
+I                                        4  12 CU9
+I                                       13  170ORD#IN
+I        AB  02   1 CS   2 C0   3 C2
+I                                        4   60LINEIN
+I                                        4   60L#IN
+I                                        4   60L#
+I                                        7  120QTYIN
+I                                       13  32 NUMBIN
+I                                       33  412PRICIN
+I                                       42  42 TOININ
+I                                       43  43 NOCHIN
+IGLCORP  XX
+I                                        3  32 CONAME                GL0040 COMPANY
+IDETAIL  XX
+IDETAILD XX
+I                                        1   9 OLD09
+I                                        1   2 CO#
+I                                        3   9 CUST#
+I                                        3   9 OLD07
+I                                       10  140ORD#
+I                                        1  14 OLD14
+I                                       15  170LINE#
+I                                       18  230OLDQTY
+C*
+C   KG                GOTO END
+C*
+C                     SETOF                     741243
+C                     SETOF                     144462
+C                     SETOF                     313233
+C                     SETOF                     343536
+C                     SETOF                     425541
+C                     SETOF                     505157
+C                     SETOF                     614463
+C                     SETOF                     646566
+C                     SETOF                     675239
+C                     SETOF                     687980
+C*---------------------------------------------------------------
+C*
+C*    SECOND HALF OF START UP SCREEN
+C*
+C   KA 04             EXSR START
+C   KA 04             GOTO END
+C*
+C*
+C*---------------------------------------------------------------
+C*
+C*    REVIEW EXISTING ORDERS
+C*
+C   KA 01             EXSR REVORD
+C   KA 01             GOTO END
+C*
+C*
+C*---------------------------------------------------------------
+C*
+C*    RETURN TO START SCREEN FROM ORDER LOOK UP
+C*
+C   KA 69
+COR KA 70
+COR KA 59
+COR KA 83             SETON                     50
+C   KA 70
+COR KA 83
+COR KA 69
+COR KA 59             EXSR START
+C   KA 70
+COR KA 83
+COR KA 69
+COR KA 59             GOTO END
+C*
+C*--------------------------------------
+C*
+C*---------------------------------------------------------------
+C*
+C   KD                Z-ADD0         RR
+C*
+C*    REVIEW ORDER JUST ENTERED
+C*
+C   KD    11          EXSR LOAD
+C   KD    11          GOTO END
+C*---------------------------------------------------------------
+C*
+C*    REVIEW EXISTING ORDER
+C*
+C*    UPDATE RECORDS FROM ARRAYS & RE-READ ORDER
+C*
+C   KDN11             EXSR UPDATE
+C*
+C   KD   N11          MOVELCOMPIN    IN09    9
+C   KD   N11          MOVE CUSTIN    IN09
+C   KD   N11          Z-ADD1         RR      30
+C   KD   N11          MOVELIN09      IN17   17
+C   KD   N11IN17      SETLLOE0001D
+C   KD   N11          EXSR LOADO
+C   KD   N11          GOTO END
+C*
+C*---------------------------------------------------------------
+C*
+C*    CANCEL ORDER
+C*
+C   KE                MOVEL*BLANK    IN17   17
+C   KE                MOVELCOMPIN    IN09    9
+C   KE                MOVE CUSTIN    IN09
+C   KE                MOVELIN09      IN14   14
+C   KE                MOVE ORD#IN    IN14
+C   KE                MOVELIN14      IN17
+C   KE      IN17      SETLLOE0001D
+C   KE                EXSR ZAP
+C   KE                EXSR START
+C   KE                GOTO END
+C*
+C*---------------------------------------------------------------
+C   KF 02             GOTO END
+C*---------------------------------------------------------------
+C*
+C*    CONTINUE ORDER REVIEW   -   ROLL THRU ORDER
+C*
+C                     SETOF                     4717
+C                     SETOF                     72
+C   02      NUMBIN    COMP *BLANK               72
+C   02      LINEIN    COMP 0                    47  17
+C   02 17   NUMBIN    COMP *BLANK                   17
+C   02 17   QTYIN     COMP 0                        17
+C*
+C   02 17             Z-ADDLIN,08    RR
+C*
+C   31
+COR 32
+COR 33
+COR 34
+COR 35
+COR 36                SETON                     2250
+C   22                EXCPT
+C                     SETOF                     22
+C   50                GOTO END
+C*
+C*
+C   02 17             SETON                     94
+C   02 17             EXSR LOAD
+C   02 17             GOTO END
+C*
+C*---------------------------------------------------------------
+C*
+C*    SET UP ARRAYS FOR EXISTING LINE  ( TO CHANGE )
+C*
+C   02 47N72          EXSR UPDEX
+C   02 47N72          SETON                     94
+C   02 47N72          GOTO END
+C*
+C*
+C*---------------------------------------------------------------
+C*
+C*    CHANGE ARRAYS FOR EXISTING LINE  ( INPUT )
+C*
+C   02 47 72          EXSR VALEX
+C   02 47 72          SETON                     94
+C   02 47 72          GOTO END
+C*
+C*---------------------------------------------------------------
+C*
+C   09                EXSR START
+C   09                GOTO END
+C*
+C   01                EXSR SCRN01
+C   01                GOTO END
+C*
+C   04                EXSR SCRN1B
+C   04                GOTO END
+C*
+C   02                EXSR SCRN02
+C   02                GOTO END
+C*
+C   03                EXSR SCRN03
+C   03                GOTO END
+C*
+C   07                EXSR SCRN07
+C   07                GOTO END
+C*
+C   08                EXSR SCRN08
+C   08                GOTO END
+C*
+C   59                EXSR SCRN09
+C   59                GOTO END
+C*
+C   69      NMIN10    COMP *BLANK                   31
+C   69 31             SETON                     5250
+C   52                EXCPT
+C                     SETOF                     52
+C   50                GOTO END
+C*
+C   69                MOVEL*BLANK    XX7     7
+C   69                MOVELNMIN10    XX7
+C   69      XX7       SETLLCUSMASD
+C   69                EXSR SCRN10
+C   69                GOTO END
+C*
+C   83                EXSR SCRN10
+C   83                GOTO END
+C*
+C   58      ST06IN    COMP *BLANK                   48
+C   58 48             EXSR REVSHP
+C   58 48             GOTO END
+C*
+C   58                EXSR SCRN12
+C   58                GOTO END
+C*
+C   70                EXSR SCRN14
+C   70                GOTO END
+C*
+C           END       TAG
+C*
+C*---------------------------------------------------------------
+C**
+C*    CLEAR ALL FIELDS & PUT OUT BEGINNING SCREEN
+C**
+CSR         START     BEGSR                                          GL0040  * START *
+C                     SETOF                     7420
+C                     Z-ADD0         R       30
+C                     SETOF                     119495
+C                     Z-ADD0         L
+C                     Z-ADD0         Q
+C                     MOVEL*BLANK    I
+C                     Z-ADD0         P
+C                     Z-ADD0         C
+C                     Z-ADD0         CT#
+C                     Z-ADD0         OH
+C                     Z-ADD0         CST
+C                     MOVEL*BLANK    TII
+C                     MOVEL*BLANK    NCI
+C                     MOVEL*BLANK    DSI
+C                     MOVEL*BLANK    PKI
+C                     Z-ADD0         LIN
+C                     Z-ADD0         QTY
+C                     MOVEL*BLANK    ITM
+C                     MOVEL*BLANK    DSC
+C                     MOVEL*BLANK    PKG
+C                     Z-ADD0         UPR
+C                     MOVEL*BLANK    TOI
+C                     MOVEL*BLANK    TON
+C                     Z-ADD0         OLDACT  70
+C                     Z-ADD0         AR
+C                     Z-ADD0         CLIMIT
+C                     Z-ADD0         LEFT
+C                     Z-ADD0         ART
+C                     Z-ADD0         SHCG03
+C                     MOVEL*BLANK    XHADD1
+C                     MOVEL*BLANK    XHADD2
+C*
+C                     Z-ADD0         XLDSHG
+C                     MOVEL*BLANK    XLDSTO
+C                     MOVEL*BLANK    XLDSLS
+C                     MOVEL*BLANK    XLDDIS
+C                     MOVEL*BLANK    XLDEXE
+C                     MOVEL*BLANK    XLDCOD
+C                     MOVEL*BLANK    XLDPO
+CSR                   SETON                     21
+CSR                   EXCPT
+CSR                   SETOF                     21
+CSR                   ENDSR
+C*
+C**
+C*---------------------------------------------------------------
+C**
+C*    FIRST INPUT SCREEN
+C**
+CSR         SCRN01    BEGSR                                          GL0040  * SCRN01 *
+CSR         COMPIN    CHAINGLCORP               31
+C*
+C   31
+COR 35
+COR 33                SETON                     2150
+C   21                EXCPT
+C                     SETOF                     21
+C   50                GOTO OUT01
+C*
+C*
+C           JUMP11    TAG
+C*
+C                     SETON                     15
+C                     EXCPT
+C                     SETOF                     15
+C*
+CSR         OUT01     ENDSR
+C*
+C*---------------------------------------------------------------
+C*
+CSR         SCRN1B    BEGSR                                          GL0040 * SCRN1B *
+C*
+C*
+C                     MOVELCOMPIN    IN09    9
+C                     MOVE CUSTIN    IN09
+C                     MOVELIN09      IN14   14
+C                     MOVE ORD#IN    IN14
+C                     MOVELIN14      IN17   17
+C           IN17      SETLLOE0001D
+C                     SETOF                     12
+C                     READ OE0001D                  12
+C  N12      IN14      COMP OLD14                1212
+C   12                SETON                     313233
+C   12                SETON                     1550
+C   15                EXCPT
+C                     SETOF                     15
+C   50                GOTO OUT01B
+C*
+C           IN17      SETLLOE0001D
+C*
+C                     EXSR LOADO
+C*
+C                     SETON                     22
+C                     EXCPT
+C                     SETOF                     22
+C*
+CSR         OUT01B    ENDSR
+C*
+C*---------------------------------------------------------------
+C**
+C*    INPUT ITMES & VALIDATE
+C**
+CSR         SCRN02    BEGSR                                          GL0040  * SCRN02 *
+C                     SETOF                     63
+C           NUMBIN    CHAININVENT               63
+C           NOCHIN    COMP 'N'                      81
+C           PRICIN    COMP 0                        82
+C   81 82             Z-ADDCARPRC    PRICIN
+C  N81                GOTO NOCHGT                     BYPASS NO CHG'SGL0040
+C  N82                GOTO NOCHGT                     BYPASS OVERRIDEGL0040
+C********************************************************************GL0040
+C********************************************************************GL0040
+C**       PERFORM CONTRACT FILE CHECKS
+C**
+C**
+C                     MOVELCUSTIN    ZCHN27 27
+C                     MOVE NUMBIN    ZCHN27
+C           ZCHN27    CHAINCUSCON               05
+C  N05                Z-ADDZQTY1     IQ1
+C  N05                Z-ADDZQTY2     IQ2
+C  N05                Z-ADDZQTY3     IQ3
+C  N05                Z-ADDZQTY4     IQ4
+C  N05                Z-ADDZQTY5     IQ5
+C  N05                Z-ADDZPRI1     IP1
+C  N05                Z-ADDZPRI2     IP2
+C  N05                Z-ADDZPRI3     IP3
+C  N05                Z-ADDZPRI4     IP4
+C  N05                Z-ADDZPRI5     IP5
+C********************************************************************GL0040
+C********************************************************************GL0040
+C**
+C**
+C**       PERFORM PRICE BREAKS
+C**
+C                     SETOF                     0506
+C           IQ5       COMP 0                        05
+C  N05      QTYIN     COMP IQ5                  06  06
+C  N05 06             Z-ADDIP5       PRICIN
+C  N05 06             GOTO NOCHGT
+C                     SETOF                     0506
+C           IQ4       COMP 0                        05
+C  N05      QTYIN     COMP IQ4                  06  06
+C  N05 06             Z-ADDIP4       PRICIN
+C  N05 06             GOTO NOCHGT
+C                     SETOF                     0506
+C           IQ3       COMP 0                        05
+C  N05      QTYIN     COMP IQ3                  06  06
+C  N05 06             Z-ADDIP3       PRICIN
+C  N05 06             GOTO NOCHGT
+C                     SETOF                     0506
+C           IQ2       COMP 0                        05
+C  N05      QTYIN     COMP IQ2                  06  06
+C  N05 06             Z-ADDIP2       PRICIN
+C  N05 06             GOTO NOCHGT
+C                     SETOF                     0506
+C           IQ1       COMP 0                        05
+C  N05      QTYIN     COMP IQ1                  06  06
+C  N05 06             Z-ADDIP1       PRICIN
+C  N05 06             GOTO NOCHGT
+C**
+C**
+C*
+C           NOCHGT    TAG
+C   63                SETON                     2250
+C   22                EXCPT
+C                     SETOF                     22
+C   50                GOTO OUT02
+C*
+C           NOCHIN    COMP 'Y'                      73
+C     N73   NOCHIN    COMP 'N'                      73
+C     N73             SETON                     66
+C           NOCHIN    COMP 'Y'                      81
+C           PRICIN    COMP 0                        82
+C      81N82          SETON                     64
+C     N81 82          SETON                     64
+C           TOININ    COMP 'Y'                      73
+C     N73   TOININ    COMP 'N'                      73
+C     N73             SETON                     65
+C*
+C           QTYIN     COMP 0                        62
+C   64
+COR 62
+COR 65
+COR 66
+COR 68
+COR 63                SETON                     2250
+C   22                EXCPT
+C                     SETOF                     22
+C   50                GOTO OUT02
+C*
+C                     EXSR ROLLUP
+C*
+C                     SETON                     2295
+C                     EXCPT
+C                     SETOF                     22
+C*
+CSR         OUT02     ENDSR
+C*
+C*---------------------------------------------------------------
+C**
+C*
+C*---------------------------------------------------------------
+C*
+C*    INPUT SELECTION # FROM ORDER REVIEW OR CONTINUE LOOK-UP
+C*          ( 1 LINE PER ORDER )
+C*
+CSR         SCRN09    BEGSR                                          GL0040  * SCRN09 *
+C           NUMB09    COMP 0                        51
+C   51                GOTO GOOD51
+C*
+C                     Z-ADD1         X
+C           L51       TAG
+C           NUMB09    COMP OOR,X                    51
+C   51                GOTO NEXT51
+C*
+C           X         COMP 11                       29
+C   29                SETON                     5031
+C   29                EXCPT
+C                     SETOF                     29
+C   50                GOTO OUT09
+C*
+C           X         ADD  1         X
+C                     GOTO L51
+C*
+C           NEXT51    TAG
+C*
+C                     MOVEL*BLANK    IN17
+C                     MOVELIN09      IN14
+C                     MOVE NUMB09    IN14
+C                     Z-ADDNUMB09    ORD#IN
+C                     Z-ADD0         NUMB09
+C                     MOVELIN14      IN17
+C           IN17      SETLLOE0001D
+C*
+C                     EXSR LOADO
+C                     GOTO OUT09
+C*
+C           GOOD51    TAG
+C*
+C                     Z-ADD1         X
+C                     Z-ADD0         OOR
+C                     Z-ADD0         OQY
+C                     MOVEL*BLANK    ODT
+C                     MOVEL*BLANK    TYP
+C*
+C           LOOREV    TAG
+C                     SETOF                     91
+C                     READ OE0001D                  91
+C  N91      IN09      COMP OLD09                9191
+C   91                SETON                     29
+C   29                EXCPT
+C                     SETOF                     29
+C   91                GOTO OUT09
+C*
+C           OLDDEL    COMP 'D'                      91
+C   91                GOTO LOOREV
+C*
+C                     Z-ADD1         ZZ      20
+C           LZZ       TAG
+C           ORD#      COMP OOR,ZZ                   91
+C   91      OQY,ZZ    ADD  OLDQTY    OQY,ZZ
+C   91                GOTO LOOREV
+C*
+C           ZZ        COMP 11                       92
+C  N92      ZZ        ADD  1         ZZ
+C  N92                GOTO LZZ
+C*
+C                     Z-ADDORD#      OOR,X
+C           OQY,X     ADD  OLDQTY    OQY,X
+C                     MOVELOLDMO     OLD3    3
+C                     MOVE '/'       OLD3
+C                     MOVELOLD3      OLD5    5
+C                     MOVE OLDDY     OLD5
+C                     MOVELOLD5      OLD8    8
+C                     MOVEL'/'       OLD3
+C                     MOVE OLDYR     OLD3
+C                     MOVE OLD3      OLD8
+C                     MOVELOLD8      ODT,X
+C           OLDTYP    COMP 'R'                      51
+C   51                MOVELMSG,01    TYP,X
+C           OLDTYP    COMP 'C'                      51
+C   51                MOVELMSG,02    TYP,X
+C           X         COMP 11                       51
+C   51                SETON                     29
+C   29                EXCPT
+C                     SETOF                     29
+C   51                GOTO OUT09
+C*
+C           X         ADD  1         X
+C                     GOTO LOOREV
+C*
+CSR         OUT09     ENDSR
+C*
+C*---------------------------------------------------------------
+C*
+C*    VALIDATE CUSTOMER # SELECTED OR CONTINUE REVIEW
+C*
+CSR         SCRN10    BEGSR                                          GL0040 *SCRN10*
+C  N83                GOTO NEXT10
+C           ACT#IN    COMP 0                        55
+C   55                GOTO NEXT10
+C*
+C                     Z-ADD1         X
+C           LP10X     TAG
+C           ACT#IN    COMP CT#,X                    55
+C   55                MOVELS10C,X    CUSTIN
+C   55      CUSTIN    CHAINCUSMAS               33
+C   55                SETON                     2150
+C   21                EXCPT
+C                     SETOF                     21
+C   50                GOTO OUT10
+C*
+C           X         COMP 10                       55
+C  N55      X         ADD  1         X
+C  N55                GOTO LP10X
+C*
+C                     SETON                     565044
+C   56                EXCPT
+C                     SETOF                     56
+C   50                GOTO OUT10
+C*
+C           NEXT10    TAG
+C*
+C                     MOVEL*BLANK    S10A
+C                     MOVEL*BLANK    S10B
+C                     MOVEL*BLANK    S10C
+C                     Z-ADD0         CT#
+C                     Z-ADD1         X
+C           LP10      TAG
+C                     SETOF                     91
+C                     READ CUSMASD                  91
+C   91                GOTO PUT10
+C           CMDEL     COMP 'D'                      91
+C   91                GOTO LP10
+C                     MOVELSTNAME    S10A,X
+C                     MOVELSTADD1    S10B,X
+C                     MOVELACT#      S10C,X
+C                     Z-ADDX         CT#,X
+C           X         COMP 10                       91
+C  N91      X         ADD  1         X
+C  N91                GOTO LP10
+C*
+C           PUT10     TAG
+C                     SETON                     56
+C                     EXCPT
+C                     SETOF                     56
+CSR         OUT10     ENDSR
+C*
+C*
+C*---------------------------------------------------------------
+C*
+C*  LOAD ARRAYS WITH DATA FROM EXISTING ORDER
+C*
+CSR         LOAD      BEGSR                                          GL0040  * LOAD *
+C*
+C*   IF NEXT ELEMENT = 0,  PUT OUT LAST SCREEN
+C*
+C                     Z-ADD0         LIN
+C                     Z-ADD0         QTY
+C                     MOVEL*BLANK    ITM
+C                     MOVEL*BLANK    DSC
+C                     MOVEL*BLANK    PKG
+C                     Z-ADD0         UPR
+C                     MOVEL*BLANK    TOI
+C                     MOVEL*BLANK    TON
+C                     Z-ADD0         CST
+C*
+C                     Z-ADD1         X
+C           RR        ADD  1         RR
+C           LOOPLD    TAG
+C                     Z-ADDL,RR      LIN,X
+C                     Z-ADDQ,RR      QTY,X
+C                     MOVELI,RR      ITM,X
+C                     MOVELDSI,RR    DSC,X
+C                     MOVELPKI,RR    PKG,X
+C                     Z-ADDP,RR      UPR,X
+C                     MOVELTII,RR    TOI,X
+C                     MOVELNCI,RR    TON,X
+C                     Z-ADDC,RR      CST,X
+C           X         COMP 08                       10
+C  N10      X         ADD  1         X
+C  N10      RR        ADD  1         RR
+C  N10                GOTO LOOPLD
+C*
+C                     SETON                     2250
+C                     EXCPT
+C                     SETOF                     22
+C*
+CSR         OUTL      ENDSR
+C*
+C*
+C*---------------------------------------------------------------
+C*
+C*  LOAD ARRAYS WITH DATA FROM EXISTING ORDER
+C*
+C*
+CSR         LOADO     BEGSR                                          GL0040  * LOADO *
+C*
+C                     SETOF                     11
+C                     Z-ADD1         RR
+C                     SETOF                     94
+C*
+C           LOOPLO    TAG
+C                     SETOF                     45
+C                     READ OE0001D                  45
+C  N45      IN14      COMP OLD14                4545
+C   45                GOTO OUTLO
+C*
+C           OLDDEL    COMP 'D'                      97
+C   97                GOTO LOOPLO
+C*
+C                     MOVELOLDSTO    XLDSTO  6
+C                     MOVELOLDSLS    XLDSLS  2
+C                     MOVELOLDDIS    XLDDIS  2
+C                     MOVELOLDEXE    XLDEXE  1
+C                     MOVELOLDCOD    XLDCOD  1
+C                     MOVELOLDPO     XLDPO  13
+C                     Z-ADDOLDSHG    XLDSHG  72
+C*
+C  N04N59             Z-ADDNUMB09    ORD#IN
+C                     Z-ADDRR        L,RR
+C                     Z-ADDOLDQTY    Q,RR
+C                     MOVELOLDITM    I,RR
+C                     Z-ADDOLDPRI    P,RR
+C                     MOVELOLDTO     TII,RR
+C                     MOVELOLDNC     NCI,RR
+C                     MOVELOLDDSC    DSI,RR
+C                     MOVELOLDPKG    PKI,RR
+C                     Z-ADDOLDCST    C,RR
+C           RR        ADD  1         RR
+C                     GOTO LOOPLO
+C*
+C           OUTLO     TAG
+C*
+C                     Z-ADD1         X
+C*
+C           LOOPXO    TAG
+C                     Z-ADDL,X       LIN,X
+C                     Z-ADDQ,X       QTY,X
+C                     MOVELI,X       ITM,X
+C                     MOVELDSI,X     DSC,X
+C                     MOVELPKI,X     PKG,X
+C                     Z-ADDP,X       UPR,X
+C                     MOVELTII,X     TOI,X
+C                     MOVELNCI,X     TON,X
+C                     Z-ADDC,X       CST,X
+C           X         COMP 08                       10
+C  N10      X         ADD  1         X
+C  N10                GOTO LOOPXO
+C*
+C                     MOVELCUSTIN    Z13Z   13
+C                     MOVE XLDSTO    Z13Z
+C           XLDSTO    COMP *BLANK               74
+C   74      Z13Z      CHAINSHIPTO               35
+C*
+C*  IF SECOND SCREEN - PUT OUT ITEM SCREEN
+C*
+C           IN17      SETLLOE0001D
+C                     EXSR ZAP
+C*
+C   04                GOTO OUTOL
+C*
+C  N11                SETON                     15  41
+C   15                EXCPT
+C                     SETOF                     15  41
+C  N11                GOTO OUTOL
+C*
+CSR                   SETON                     15
+CSR 15                EXCPT
+CSR                   SETOF                     15
+C*
+CSR         OUTOL     ENDSR
+C*
+C*---------------------------------------------------------------
+C*    PUT OUT ELEMENTS TO OPEN ORDER FILE
+C*
+CSR         UPDATE    BEGSR                                          GL0040  * UPDATE *
+C                     Z-ADD1         RR
+C*
+C           LOOPUP    TAG
+C*
+C           L,RR      COMP 0                        43
+C   43                GOTO OUTUP
+C*
+C                     MOVELCOMPIN    XX7     7
+C                     MOVE I,RR      XX20   20
+C           XX20      CHAININVENT               63
+C*
+C                     MOVELCOMPIN    XX9     9
+C                     MOVE CUSTIN    XX9
+C                     MOVELXX9       XX17   17
+C   11                MOVELNEXT#     XX8     8
+C  N11                MOVELORD#IN    XX8
+C                     MOVE L,RR      XX8
+C                     MOVE XX8       XX17
+C           XX17      CHAINOE0001               18
+C  N18                SETON                     19
+C                     EXCPT
+C                     SETOF                     1819
+C*
+C           RR        ADD  1         RR
+C                     GOTO LOOPUP
+C*
+C           OUTUP     TAG
+C                     MOVELCOMPIN    XX9
+C                     MOVE CUSTIN    XX9
+C                     MOVELXX9       XX14   14
+C   11                MOVE NEXT#     XX14
+C  N11                MOVE ORD#IN    XX14
+C   03      NOTE3A    COMP *BLANK               76
+C   76      XX14      CHAINNOTE                 77
+C   76N77             SETON                     78
+C   76                EXCPT
+C                     SETOF                     767778
+C*
+CSR                   ENDSR
+C*
+C**
+CSR         PUT22     BEGSR                                          GL0040  * PUT22 *
+CSR                   SETON                     2250
+CSR                   EXCPT
+CSR                   SETOF                     2250
+CSR                   ENDSR
+C*
+C**
+C*---------------------------------------------------------------
+C*
+C*    ROLL ITEMS THRU ARRAY FOR SCREEN OUTPUT
+C**
+C**
+CSR         ROLLUP    BEGSR                                          GL0040  * ROLLUP *
+C*
+C* RESET POINTER TO NEXT AVAILABLE LINE #
+C*
+C                     Z-ADD1         X
+C           LPX       TAG
+C           L,X       COMP 0                        71
+C  N71      X         ADD  1         X
+C  N71                GOTO LPX
+C                     Z-ADDX         R
+C                     SETON                     94
+C*
+C                     Z-ADDR         L,R
+C                     Z-ADDQTYIN     Q,R
+C                     MOVELNUMBIN    I,R
+C                     MOVELDESC      DSI,R
+C                     MOVELPACKAG    PKI,R
+C                     Z-ADDPRICIN    P,R
+C                     MOVELTOININ    TII,R
+C                     MOVELNOCHIN    NCI,R
+C                     Z-ADDCOST      C,R
+C*
+C*    LOAD ARRAYS FOR SCREEN OUTPUT
+C*    LAST 8 ELEMENTS
+C*
+C           R         COMP 08                     9090
+C   90                Z-ADD1         RL      30
+C  N90      R         SUB  7         RL
+C*
+C                     Z-ADD1         X
+C           LOOPRR    TAG
+C                     Z-ADDL,RL      LIN,X
+C                     Z-ADDQ,RL      QTY,X
+C                     MOVELI,RL      ITM,X
+C                     MOVELDSI,RL    DSC,X
+C                     MOVELPKI,RL    PKG,X
+C                     Z-ADDP,RL      UPR,X
+C                     MOVELTII,RL    TOI,X
+C                     MOVELNCI,RL    TON,X
+C                     Z-ADDC,RL      CST,X
+C           X         COMP 08                       10
+C  N10      X         ADD  1         X
+C  N10      RL        ADD  1         RL
+C  N10                GOTO LOOPRR
+C*
+CSR                   ENDSR
+C*
+C*---------------------------------------------------------------
+C**
+C*    TAG ALL ITEMS FOR SELECTED ORDER (DELETE) IF IN ORDER FILE
+C**
+CSR         ZAP       BEGSR                                          GL0040  * ZAP *
+C*
+C           MORZAP    TAG
+C                     SETOF                     45
+C                     READ OE0001D                  45
+C  N45      IN14      COMP OLD14                4545
+C   45                GOTO ENDZAP
+C*
+C                     SETON                     46
+C                     EXCPT
+C                     SETOF                     46
+C                     GOTO MORZAP
+C*
+CSR         ENDZAP    ENDSR
+C*
+C*---------------------------------------------------------------
+C*
+C*    CHECK FOR VALID LINE # ,  UPDATE EXISTING LINE
+C*
+CSR         UPDEX     BEGSR                                          GL0040  * UPDEX *
+C           L#IN      COMP L,L#IN               6161
+C   61                SETON                     2250
+C   61                EXCPT
+C                     SETOF                     2261
+C   50                GOTO OUPDEX
+C*
+C                     Z-ADD1         X
+C                     Z-ADDL#IN      RR
+C           RR        SUB  1         RR
+C*
+C                     Z-ADD0         LIN
+C                     Z-ADD0         QTY
+C                     MOVEL*BLANK    ITM
+C                     MOVEL*BLANK    DSC
+C                     MOVEL*BLANK    PKG
+C                     Z-ADD0         UPR
+C                     MOVEL*BLANK    TOI
+C                     MOVEL*BLANK    TON
+C*
+C                     Z-ADD1         X
+C           RR        ADD  1         RR
+C           LUPDEX    TAG
+C                     Z-ADDL,RR      LIN,X
+C                     Z-ADDQ,RR      QTY,X
+C                     MOVELI,RR      ITM,X
+C                     MOVELDSI,RR    DSC,X
+C                     MOVELPKI,RR    PKG,X
+C                     Z-ADDP,RR      UPR,X
+C                     MOVELTII,RR    TOI,X
+C                     MOVELNCI,RR    TON,X
+C           X         COMP 08                       10
+C  N10      X         ADD  1         X
+C  N10      RR        ADD  1         RR
+C  N10                GOTO LUPDEX
+C*
+C                     Z-ADDQ,L#IN    QTYIN
+C                     MOVELI,L#IN    NUMBIN
+C                     Z-ADDP,L#IN    PRICIN
+C                     MOVELTII,L#IN  TOININ
+C                     MOVELNCI,L#IN  NOCHIN
+C*
+C                     SETON                     225087
+C                     EXCPT
+C                     SETOF                     2250
+C*
+CSR         OUPDEX    ENDSR
+C*
+C*
+C*
+C*       VALIDATE DATA FROM LINE CHANGE
+C*    AND UPDATE ARRAYS
+C*
+CSR         VALEX     BEGSR                                          GL0040  * VALEX *
+C*
+C*
+C           NUMBIN    CHAININVENT               63
+C   63                SETON                     2250
+C   22                EXCPT
+C                     SETOF                     2263
+C   50                GOTO OVALEX
+C*
+C*
+C           NOCHIN    COMP 'Y'                      73
+C     N73   NOCHIN    COMP 'N'                      73
+C     N73             SETON                     66
+C           NOCHIN    COMP 'Y'                      81
+C           PRICIN    COMP 0                        82
+C      81N82          SETON                     64
+C     N81 82          SETON                     64
+C           TOININ    COMP 'Y'                      73
+C     N73   TOININ    COMP 'N'                      73
+C     N73             SETON                     65
+C*
+C   64
+COR 65
+COR 66
+COR 68
+COR 63                SETON                     2250
+C   22                EXCPT
+C                     SETOF                     22
+C   50                GOTO OVALEX
+C*
+C                     Z-ADDQTYIN     Q,L#
+C                     MOVELNUMBIN    I,L#
+C                     MOVELDESC      DSI,L#
+C                     MOVELPACKAG    PKI,L#
+C                     Z-ADDCOST      C,L#
+C                     Z-ADDPRICIN    P,L#
+C                     MOVELTOININ    TII,L#
+C                     MOVELNOCHIN    NCI,L#
+C*
+C                     Z-ADDL#        LIN,01
+C                     Z-ADDQ,L#      QTY,01
+C                     MOVELI,L#      ITM,01
+C                     MOVELDSI,L#    DSC,01
+C                     MOVELPKI,L#    PKG,01
+C                     Z-ADDP,L#      UPR,01
+C                     MOVELTII,L#    TOI,01
+C                     MOVELNCI,L#    TON,01
+C                     Z-ADDC,L#      CST,01
+C*
+C*
+C*    PUT OUT ELEMENTS
+C*
+C                     Z-ADD1         RR
+C*
+C           XXOPUP    TAG
+C*
+C           L,RR      COMP 0                        43
+C   43                GOTO XXTUP
+C*
+C                     MOVELCOMPIN    XX9     9
+C                     MOVE CUSTIN    XX9
+C                     MOVELXX9       XX17   17
+C                     MOVELORD#IN    XX8
+C                     MOVE L,RR      XX8
+C                     MOVE XX8       XX17
+C           XX17      CHAINOE0001               18
+C  N18                SETON                     19
+C                     EXCPT
+C                     SETOF                     1819
+C*
+C           RR        ADD  1         RR
+C                     GOTO XXOPUP
+C*
+C           XXTUP     TAG
+C*
+C                     SETOF                     87
+C                     SETON                     2294
+C                     EXCPT
+C                     SETOF                     22
+CSR         OVALEX    ENDSR
+C**
+C*---------------------------------------------------------------
+C**
+C*    SET TO OPEN ORDER FILE FOR START OF OPEN ORDER REVIEW
+C*
+CSR         REVORD    BEGSR                                          GL0040  * REVORD *
+C           COMPIN    CHAINARCORP               31
+C           CUSTIN    CHAINCUSMAS               33
+C   31
+COR 33                SETON                     2150
+C   21                EXCPT
+C                     SETOF                     21
+C   50                GOTO OUTREV
+C                     MOVEL*BLANK    IN17
+C                     MOVELCOMPIN    IN09
+C                     MOVE CUSTIN    IN09
+C                     MOVELIN09      IN17
+C           IN17      SETLLOE0001D
+C                     EXSR SCRN09
+CSR         OUTREV    ENDSR
+C*
+OSCREEN  E        21
+O                                   K8 'OE000101'
+O                         COMPIN     2
+O                         CONAME    32
+O        E        22
+O                                   K8 'OE000102'
+O                         COMPIN     2
+O                         CONAME    32
+O                         CUSTIN    39
+O                         STNAME    69
+O                         SHTOIN    75
+O                         ORD#INZ   80
+O                    11   NEXT# Z   80
+O                         STADD1   110
+O                    74   XHADD1   134
+O                         STADD2   164
+O                    74   XHADD2   188
+O*
+O                         LIN      212 '   '
+O                         QTY      276 '   ,  0-'
+O                         ITM      436
+O                         DSC      628
+O                         PKG      652
+O                         UPR      732 '       .  '
+O                         TOI      740
+O                         TON      748
+O*
+O*
+O                    50   LINEINZ  751
+O                    50   QTYIN    757
+O                    50   NUMBIN   777
+O                    50   PRICIN   786
+O                                  787 'Y'
+O                                  788 'N'
+O                    50   TOININ   787
+O                    50   NOCHIN   788
+O        E        29
+O                                   K8 'OE000109'
+O                         COMPIN     2
+O                         CONAME    32
+O                         CUSTIN    39
+O                         STNAME    69
+O*
+O                         OOR,01Z   75
+O                         OQY,01K   88
+O                         ODT,01   101
+O                         TYP,01   111
+O                         OOR,02Z  152
+O                         OQY,02K  165
+O                         ODT,02   178
+O                         TYP,02   188
+O                         OOR,03Z  229
+O                         OQY,03K  242
+O                         ODT,03   255
+O                         TYP,03   265
+O                         OOR,04Z  306
+O                         OQY,04K  319
+O                         ODT,04   332
+O                         TYP,04   342
+O                         OOR,05Z  383
+O                         OQY,05K  396
+O                         ODT,05   409
+O                         TYP,05   419
+O                         OOR,06Z  460
+O                         OQY,06K  473
+O                         ODT,06   486
+O                         TYP,06   496
+O                         OOR,07Z  537
+O                         OQY,07K  550
+O                         ODT,07   563
+O                         TYP,07   573
+O                         OOR,08Z  614
+O                         OQY,08K  627
+O                         ODT,08   640
+O                         TYP,08   650
+O                         OOR,09Z  691
+O                         OQY,09K  704
+O                         ODT,09   717
+O                         TYP,09   727
+O                         OOR,10Z  768
+O                         OQY,10K  781
+O                         ODT,10   794
+O                         TYP,10   804
+O                         OOR,11Z  845
+O                         OQY,11K  860
+O                         ODT,11   871
+O                         TYP,11   881
+O*
+O                    50   NUMB09Z  921
+O        E        56
+O                                   K8 'OE000111'
+O                         NMIN10    10
+O                         CT#       30 '  '
+O                         S10A     330
+O                         S10B     630
+O                         S10C     700
+O                    44   ACT#IN   702
+O        E        57
+O                                   K8 'OE000112'
+O                         COMPIN     2
+O                         CONAME    32
+O                         CUSTIN    39
+O                         STNAME    69
+O                         SHTOIN    75
+O                         ORD#INZ   80
+O                    11   NEXT# Z   80
+O                         STADD1   110
+O                         STADD2   140
+O*
+O                         S10A     440
+O                         S10B     740
+O                         S11C     800
+O                    44   ST11IN   806
+OOE0001  EADD     18
+O                         XX17      17
+O                         Q,RR      23
+O                         I,RR      43
+O                         P,RR      48P
+O                         TII,RR    49
+O        E        19
+O                         Q,RR      23
+O                         I,RR      43
+O                         P,RR      48P
+O                         TII,RR    49
+O                         NCI,RR    50
+O                         DSI,RR    74
+O                         PKI,RR    77
+O                                  256 ' '
+OOE0001D E        46
+O                                  256 'D'

@@ -1,0 +1,9 @@
+A          R GLMASTR
+A            CO            2  0
+A            ACCTNO        6  0
+A            ACCTDESC     30A
+A            ACCTTYPE      1A
+A            CURBAL       11  2
+A            GLDEL         1A
+A          K CO
+A          K ACCTNO
