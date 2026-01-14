@@ -1,0 +1,26 @@
+A          R GL004001
+A                                      CF03
+A                                      CF12
+A            CO            2  0B  5 10
+A            CONAME       30A     5 20
+A            ACCTNO        6  0B  7 10
+A            ACCTDESC     30A     7 20
+A            MSG          40A     9 10
+
+A          R GL004002
+A                                      CF03
+A                                      CF12
+A            TRNDATE       6  0B  5 10
+A            TRNDESC      25A     6 10
+A            DEBIT        11  2B  7 10
+A            CREDIT       11  2B  8 10
+A            SEQNO         4  0B  9 10
+
+A          R GL004003
+A                                      CF03
+A                                      CF12
+A            LINENO        3  0O  5  5
+A            TRNDATE       6  0O  5 10
+A            TRNDESC      25A     5 20
+A            DEBIT        11  2O  5 50
+A            CREDIT       11  2O  5 65
