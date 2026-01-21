@@ -1,4 +1,4 @@
-A                                      DSPSIZ(24 80)
+     A                                      DSPSIZ(24 80)
      A                                      INDARA
      A                                      CA03(03)
      A                                      CA12(12)
@@ -26,3 +26,4 @@ A                                      DSPSIZ(24 80)
      A            DSPSTAT     10A  O     9 22
 
      A                                 11  2'F3=Exit   F12=Cancel'
+
