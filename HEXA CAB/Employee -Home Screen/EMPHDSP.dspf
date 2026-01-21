@@ -1,0 +1,22 @@
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      PRINT
+     A                                      INDARA
+
+     A          R EMPHOMER
+     A                                      CF03(03)
+     A                                      CF12(12)
+     A                                  1 30'HEXA CAB - Employee Home'
+     A                                  4 20'Employee ID   :'
+     A            DSPEMPID      6Y 0O  4 40
+     A                                  5 20'Employee Name :'
+     A            DSPNAME      30A  O  5 40
+
+     A                                  8 20'1. View Roster'
+     A                                  9 20'2. Adhoc Request'
+     A                                 10 20'3. Cancel Cab'
+     A                                 11 20'4. Update Profile'
+     A                                 12 20'5. Raise Complaint'
+
+     A                                 22  2'F3=Exit'
+     A                                 22 60'F12=Logout'
+
