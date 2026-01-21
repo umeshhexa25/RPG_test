@@ -1,0 +1,3 @@
+     A          R ADHREC                  PFILE(ADHOCPF)
+     A          K EMPID
+     A          K REQDT

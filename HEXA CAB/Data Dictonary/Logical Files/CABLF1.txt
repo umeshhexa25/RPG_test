@@ -1,0 +1,5 @@
+     A          R CABREC                  PFILE(CABMAST)
+     A          K AVAIL
+     A          K SHIFT
+     A          K CABID
+     A          S AVAIL                  COMP(EQ 'Y')

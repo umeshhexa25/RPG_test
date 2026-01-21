@@ -1,0 +1,2 @@
+     A          R EMPREC                  PFILE(EMPMAST)
+     A          K EMPID

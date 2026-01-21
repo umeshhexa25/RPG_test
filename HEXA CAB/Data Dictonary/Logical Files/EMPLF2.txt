@@ -1,0 +1,4 @@
+     A          R EMPREC                  PFILE(EMPMAST)
+     A          K STATUS
+     A          K EMPID
+     A          S STATUS                 COMP(EQ 'Y')

@@ -1,0 +1,3 @@
+     A          R LOGINREC                PFILE(LOGINPF)
+     A          K USERTYPE
+     A          K USERID
