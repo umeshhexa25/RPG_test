@@ -1,0 +1,29 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Update Window Record
+*-----------------------------------------------------------------
+     A          R EMPUPD
+     A                                      WINDOW(5 10 12 60)
+     A                                      OVERLAY
+
+     A                                  1 20'UPDATE EMPLOYEE PROFILE'
+
+     A                                  3  2'Employee ID :'
+     A            DSP_EMP       6S 0O     3 18
+
+     A                                  4  2'Employee Name:'
+     A            DSP_NAME     30A  B     4 18
+
+     A                                  5  2'Address      :'
+     A            DSP_ADDR     50A  B     5 18
+
+     A                                  6  2'Phone No     :'
+     A            DSP_PHONE    10A  B     6 18
+
+     A                                  7  2'S t a t u s  :'
+     A            DSP_STAT      1A  B     7 18
+
+     A                                 10  2'Enter=Save   F12=Cancel'
