@@ -1,0 +1,7 @@
+     A          R LOGINREC
+     A            USERID        10S 0
+     A            USERTYPE      10A
+     A            LOGINID       10A
+     A            PASSWORD      10A
+     A          K USERID
+
