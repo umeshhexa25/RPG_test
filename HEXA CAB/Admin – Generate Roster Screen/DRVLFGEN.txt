@@ -1,0 +1,4 @@
+     A          R DRVREC                 PFILE(DRIVERPF)
+     A          K STATUS
+     A          K DRVNO
+     A          S STATUS                 COMP(EQ 'Y')
