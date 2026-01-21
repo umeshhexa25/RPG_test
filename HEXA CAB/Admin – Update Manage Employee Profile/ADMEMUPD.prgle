@@ -1,0 +1,56 @@
+H**********************************************************
+H* Program : ADMEMUPD
+H* Purpose : Admin - Update Employee Profile
+H**********************************************************
+H DFTACTGRP(*NO)
+H ACTGRP(*CALLER)
+
+FADMEMUPDSP CF   E             WORKSTN
+FEMPLFUPD   UF   E           K DISK
+
+C**********************************************************
+C* Entry Parameter
+C**********************************************************
+C           *ENTRY    PLIST
+C                     PARM           PEMPID     6 0
+
+C**********************************************************
+C* Load Employee Record
+C**********************************************************
+C                     CHAIN PEMPID    EMPLFUPD   90
+C   90                SETON                     LR
+C   90                RETURN
+
+C**********************************************************
+C* Load screen fields
+C**********************************************************
+C                     MOVE EMPID      DSP_EMP
+C                     MOVE EMPNAME    DSP_NAME
+C                     MOVE ADDRESS    DSP_ADDR
+C                     MOVE PHONE      DSP_PHONE
+C                     MOVE STATUS     DSP_STAT
+
+MAINLOOP  TAG
+C                     EXFMT EMPUPD
+
+C**********************************************************
+C* Cancel
+C**********************************************************
+C                     IF   *IN12 = *ON
+C                     SETON                     LR
+C                     RETURN
+C                     ENDIF
+
+C**********************************************************
+C* Update Record
+C**********************************************************
+C                     MOVE DSP_NAME   EMPNAME
+C                     MOVE DSP_ADDR   ADDRESS
+C                     MOVE DSP_PHONE  PHONE
+C                     MOVE DSP_STAT   STATUS
+
+C                     UPDATE EMPREC
+
+C                     SETON                     LR
+C                     RETURN
+
