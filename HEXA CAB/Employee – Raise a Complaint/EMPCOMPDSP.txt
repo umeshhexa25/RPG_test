@@ -1,0 +1,28 @@
+A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Employee Raise Complaint Screen
+*-----------------------------------------------------------------
+     A          R COMPLENTR
+     A                                  1 22'HEXA CAB TRANSPORT'
+     A                                  2 22'EMPLOYEE COMPLAINT ENTRY'
+
+     A                                  5  5'Employee ID   :'
+     A            DSPEMPID     6S 0O     5 25
+
+     A                                  6  5'Cab ID        :'
+     A            DSPCABID     5S 0B     6 25
+
+     A                                  7  5'Driver No     :'
+     A            DSPDRVNO     6S 0B     7 25
+
+     A                                  9  5'Complaint    :'
+     A            DSPDESC    50A  B     9 25
+
+     A                                 12  5'S t a t u s    :'
+     A            DSPSTAT    10A  O    12 25
+
+     A                                 22  2'F3=Exit   F12=Cancel   Enter=Submit'
