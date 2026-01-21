@@ -1,0 +1,12 @@
+     A          R CHGPWDFMT
+     A                                      WINDOW(5 15 12 50)
+     A                                      CF06(06)
+     A                                      CF12(12)
+     A                                  1 15'Change Password'
+     A                                  3  2'Old Password  :'
+     A            OLDPWD        10A  B  3 22DSPATR(PR)
+     A                                  5  2'New Password  :'
+     A            NEWPWD        10A  B  5 22DSPATR(PR)
+     A                                  7  2'Confirm Pwd   :'
+     A            CNFPWD        10A  B  7 22DSPATR(PR)
+     A                                  9  2'F6=Change   F12=Cancel'
