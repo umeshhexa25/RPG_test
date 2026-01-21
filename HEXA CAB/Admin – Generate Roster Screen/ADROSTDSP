@@ -1,1 +1,23 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Admin Generate Roster Screen
+*-----------------------------------------------------------------
+     A          R ROSTGEN
+     A                                  1 22'HEXA CAB TRANSPORT'
+     A                                  2 25'ADMIN - GENERATE ROSTER'
+
+     A                                  5  5'Roster Date (YYYYMMDD):'
+     A            DSPROSDT     8S 0B     5 35
+
+     A                                  6  5'S h i f t              :'
+     A            DSPSHIFT    10A  B     6 35
+
+     A                                  9  5'Press Enter to Generate Roster'
+
+     A                                 22  2'F3=Exit   F12=Back'
+
 
