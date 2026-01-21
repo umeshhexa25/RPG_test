@@ -1,0 +1,48 @@
+      A                                      DSPSIZ(24 80)
+     A                                      PRINT
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record Format
+*-----------------------------------------------------------------
+     A          R SFL01                    SFL
+     A            SFLROSTDT     8S 0O      6  2TEXT('Roster Date')
+     A            SFLCABID      5S 0O      6 13TEXT('Cab ID')
+     A            SFLCABNO     10A  O      6 21TEXT('Cab Number')
+     A            SFLDRVNM     30A  O      6 33TEXT('Driver Name')
+     A            SFLPICKTM    10A  O      6 66TEXT('Pickup Time')
+
+*-----------------------------------------------------------------
+* Subfile Control Record Format
+*-----------------------------------------------------------------
+     A          R SFLCTL01                SFLCTL(SFL01)
+     A                                      SFLSIZ(10)
+     A                                      SFLPAG(10)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Screen Headings
+*-----------------------------------------------------------------
+     A                                  1 20'HEXA CAB TRANSPORT'
+     A                                  2 25'EMPLOYEE ROSTER VIEW'
+
+*-----------------------------------------------------------------
+* Column Headings
+*-----------------------------------------------------------------
+     A                                  4  2'DATE'
+     A                                  4 13'CAB ID'
+     A                                  4 21'CAB NUMBER'
+     A                                  4 33'DRIVER NAME'
+     A                                  4 66'PICKUP TIME'
+
+*-----------------------------------------------------------------
+* Footer / Function Key Text
+*-----------------------------------------------------------------
+     A                                  23  2'F3=Exit'
+     A                                  23 15'F12=Back'
