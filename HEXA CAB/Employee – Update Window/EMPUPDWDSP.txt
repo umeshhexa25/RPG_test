@@ -1,0 +1,29 @@
+A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA06(06)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Employee Update Window
+*-----------------------------------------------------------------
+     A          R UPDWIN                  WINDOW(6 10 12 60)
+     A                                      OVERLAY
+     A                                  1 18'UPDATE PERSONAL DETAILS'
+
+     A                                  3  2'Employee ID :'
+     A            DSPEMPID     6S 0O     3 20
+
+     A                                  5  2'Address     :'
+     A            DSPADDR    100A  B     5 20
+
+     A                                  6  2'City        :'
+     A            DSPCITY     20A  B     6 20
+
+     A                                  7  2'Mobile No   :'
+     A            DSPMOBNO    10P 0B     7 20
+
+     A                                  8  2'Email ID    :'
+     A            DSPEMAIL    40A  B     8 20
+
+     A                                 10  2'F6=Save  F12=Cancel  F3=Exit'
