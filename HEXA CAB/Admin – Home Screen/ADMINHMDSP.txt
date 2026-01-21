@@ -1,0 +1,22 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+
+*-----------------------------------------------------------------
+* Admin Home Screen
+*-----------------------------------------------------------------
+     A          R ADMINHM
+     A                                  1 25'HEXA CAB TRANSPORT'
+     A                                  2 30'ADMIN HOME SCREEN'
+
+     A                                  5 10'1. Employee Master'
+     A                                  6 10'2. Cab Master'
+     A                                  7 10'3. Driver Master'
+     A                                  8 10'4. Roster Management'
+     A                                  9 10'5. Complaints Handling'
+     A                                 10 10'6. Logout'
+
+     A                                 13 10'Enter Option :'
+     A            DSPOPT       1A  B    13 25
+
+     A                                 22  2'F3=Exit'
