@@ -1,0 +1,28 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Ad-hoc Request Entry Screen
+*-----------------------------------------------------------------
+     A          R ADHENTR
+     A                                  1 25'HEXA CAB TRANSPORT'
+     A                                  2 23'EMPLOYEE AD-HOC REQUEST'
+
+     A                                  5  5'Employee ID  :'
+     A            DSPEMPID     6S 0O     5 22
+
+     A                                  7  5'Request Date :'
+     A            DSPREQDT     8S 0B     7 22
+
+     A                                  8  5'Request Time :'
+     A            DSPREQTM     6S 0B     8 22
+
+     A                                  9  5'Reason       :'
+     A            DSPREASN    50A  B     9 22
+
+     A                                 12  5'Status       :'
+     A            DSPAPPRV     1A  O    12 22
+
+     A                                 22  2'F3=Exit  F12=Back'
