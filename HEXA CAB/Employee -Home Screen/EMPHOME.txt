@@ -1,0 +1,79 @@
+H**********************************************************
+H* Program : EMPHOME
+H* Purpose : Employee Home Screen - HEXA CAB
+H* Notes   : Uses Logical File EMPLF1
+H**********************************************************
+H DFTACTGRP(*NO) ACTGRP(*CALLER)
+
+FEMPHDSP   CF   E             WORKSTN
+FEMPLF1    IF   E           K DISK
+
+IEMPLF1    NS
+I              EMPID        6S 0
+I              EMPNAME     30A
+
+C**********************************************************
+C* Entry Parameters
+C**********************************************************
+C           *ENTRY    PLIST
+C                     PARM           PEMPID     6 0
+
+C**********************************************************
+C* Fetch Employee Details (via Logical File)
+C**********************************************************
+C                     CHAIN PEMPID   EMPLF1     90
+C   90                SETON                     LR
+C   90                RETURN
+
+C**********************************************************
+C* Load Display Fields
+C**********************************************************
+C                     Z-ADD EMPID     DSPEMPID
+C                     MOVEL EMPNAME   DSPNAME
+
+MAINLOOP  TAG
+C                     EXFMT EMPHOMER
+
+C**********************************************************
+C* Exit / Logout Handling
+C**********************************************************
+C                     IF   *IN03 = *ON
+C                     SETON                     LR
+C                     RETURN
+C                     ENDIF
+
+C                     IF   *IN12 = *ON
+C                     SETON                     LR
+C                     RETURN
+C                     ENDIF
+
+C**********************************************************
+C* Menu Options Routing
+C**********************************************************
+C                     IF   *IN01 = *ON
+C                     CALL 'EMPROST'
+C                     PARM           PEMPID
+C                     ENDIF
+
+C                     IF   *IN02 = *ON
+C                     CALL 'EMPADHC'
+C                     PARM           PEMPID
+C                     ENDIF
+
+C                     IF   *IN03 = *ON
+C                     CALL 'EMPCANC'
+C                     PARM           PEMPID
+C                     ENDIF
+
+C                     IF   *IN04 = *ON
+C                     CALL 'EMPUPDT'
+C                     PARM           PEMPID
+C                     ENDIF
+
+C                     IF   *IN05 = *ON
+C                     CALL 'EMPCOMP'
+C                     PARM           PEMPID
+C                     ENDIF
+
+C                     GOTO MAINLOOP
+

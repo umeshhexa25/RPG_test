@@ -1,0 +1,8 @@
+     A          R EMPREC
+     A            EMPID        6S 0       TEXT('Employee ID')
+     A            EMPNAME     30A         TEXT('Employee Name')
+     A            DEPT        20A
+     A            MOBNO       10P 0
+     A            EMAIL       30A
+     A            STATUS       1A
+     A          K EMPID
