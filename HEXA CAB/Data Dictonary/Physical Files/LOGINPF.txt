@@ -1,0 +1,7 @@
+     A          R LOGINREC                TEXT('Login Details')
+     A            USERID       6S 0       TEXT('User ID')
+     A            USERNAME    30A         TEXT('User Name')
+     A            PASSWORD    10A         TEXT('Password')
+     A            USERTYPE    10A         TEXT('EMPLOYEE / ADMIN / MANAGER')
+     A            STATUS       1A         TEXT('Active Status')
+     A          K USERID

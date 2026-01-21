@@ -1,0 +1,13 @@
+     A          R EMPREC                    TEXT('Employee Master')
+     A            EMPID        6S 0         TEXT('Employee ID')
+     A            EMPNAME     30A           TEXT('Employee Name')
+     A            GENDER       1A           TEXT('Gender')
+     A            DEPT        20A           TEXT('Department')
+     A            ADDRESS    100A           TEXT('Home Address')
+     A            LANDMARK    30A           TEXT('Landmark')
+     A            CITY        20A           TEXT('City')
+     A            MOBNO       10P 0          TEXT('Mobile Number')
+     A            EMAIL       40A           TEXT('Email ID')
+     A            CABOPT       1A           TEXT('Cab Opted Y/N')
+     A            STATUS       1A           TEXT('Active Status')
+     A          K EMPID

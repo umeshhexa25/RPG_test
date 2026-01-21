@@ -1,0 +1,8 @@
+     A          R DRVREC                   TEXT('Driver Master')
+     A            DRVNO        6S 0        TEXT('Driver Number')
+     A            DRVNAME     30A          TEXT('Driver Name')
+     A            MOBNO       10P 0         TEXT('Mobile Number')
+     A            LICENSE    15A           TEXT('Driving License No')
+     A            AADHAR     12P 0          TEXT('Aadhar Number')
+     A            STATUS      1A           TEXT('Active Status')
+     A          K DRVNO

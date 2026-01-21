@@ -1,0 +1,10 @@
+     A          R COMPREC                TEXT('Employee Complaints')
+     A            COMPID       6S 0      TEXT('Complaint ID')
+     A            EMPID        6S 0      TEXT('Employee ID')
+     A            EMPNAME     30A        TEXT('Employee Name')
+     A            CABID        5S 0      TEXT('Cab ID')
+     A            DRVNO        6S 0      TEXT('Driver Number')
+     A            DESCR       50A        TEXT('Complaint Description')
+     A            STATUS      10A        TEXT('OPEN / CLOSED')
+     A            ADMINCMT    50A        TEXT('Admin Comments')
+     A          K COMPID

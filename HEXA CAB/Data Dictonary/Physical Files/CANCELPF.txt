@@ -1,0 +1,9 @@
+     A          R CANREC                 TEXT('Cab Cancellation')
+     A            CANID        6S 0      TEXT('Cancellation ID')
+     A            EMPID        6S 0      TEXT('Employee ID')
+     A            CABID        5S 0      TEXT('Cab ID')
+     A            FROMDT       8S 0      TEXT('From Date YYYYMMDD')
+     A            TODT         8S 0      TEXT('To Date YYYYMMDD')
+     A            MODE        10A        TEXT('FULL / PARTIAL')
+     A            STATUS      10A        TEXT('PENDING / APPROVED')
+     A          K CANID

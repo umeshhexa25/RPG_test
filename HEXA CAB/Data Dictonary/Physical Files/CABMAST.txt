@@ -1,0 +1,9 @@
+     A          R CABREC                    TEXT('Cab Master')
+     A            CABID        5S 0         TEXT('Cab ID')
+     A            CABNO       10A           TEXT('Cab Number')
+     A            CAPACITY     3S 0         TEXT('Seating Capacity')
+     A            OCCUPIED     3S 0         TEXT('Current Occupancy')
+     A            SHIFT       10A           TEXT('Shift')
+     A            TIMING      10A           TEXT('Timing')
+     A            AVAIL        1A           TEXT('Available Y/N')
+     A          K CABID

@@ -1,0 +1,12 @@
+     A          R ROSTREC                  TEXT('Daily Cab Roster')
+     A            ROSTDT      8S 0         TEXT('Roster Date YYYYMMDD')
+     A            CABID       5S 0         TEXT('Cab ID')
+     A            EMPID       6S 0         TEXT('Employee ID')
+     A            EMPNAME    30A           TEXT('Employee Name')
+     A            DRVNO       6S 0         TEXT('Driver Number')
+     A            DRVNAME    30A           TEXT('Driver Name')
+     A            PICKUPTM   10A           TEXT('Pickup Time')
+     A            DROPTM     10A           TEXT('Drop Time')
+     A          K ROSTDT
+     A          K CABID
+     A          K EMPID
