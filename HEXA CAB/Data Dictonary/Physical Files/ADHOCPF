@@ -1,1 +1,10 @@
+     A          R ADHREC                TEXT('Adhoc Cab Requests')
+     A            REQID       6S 0      TEXT('Request ID')
+     A            EMPID       6S 0      TEXT('Employee ID')
+     A            EMPNAME    30A        TEXT('Employee Name')
+     A            REQDT       8S 0      TEXT('Request Date YYYYMMDD')
+     A            REQTM       6S 0      TEXT('Request Time HHMMSS')
+     A            REASON     50A        TEXT('Reason')
+     A            APPROVAL    1A        TEXT('Approved Y/N')
+     A          K REQID
 
