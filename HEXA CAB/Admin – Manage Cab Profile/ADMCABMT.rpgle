@@ -41,11 +41,11 @@ C                     GOTO MAINLOOP
 C**********************************************************
 C* Load All Subfile
 C**********************************************************
-LOADSFL   BEGSR
+C LOADSFL   BEGSR
 C                     Z-ADD 0        RRN
 C                     SETLL *LOVAL   CABLFADM
 
-LOADLP    DOW   *IN99 = *OFF
+C LOADLP    DOW   *IN99 = *OFF
 C                     READ  CABLFADM                99
 C                     IF   *IN99 = *ON
 C                     LEAVE
@@ -65,3 +65,4 @@ C                     WRITE CABSFL
 
 C                     ENDDO
 C                     ENDSR
+
