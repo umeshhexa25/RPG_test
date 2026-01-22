@@ -1,0 +1,58 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R CABSFL                SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLCABID     5S 0O     6  6
+     A            SFLCABNO    10A  O     6 14
+     A            SFLTYPE     10A  O     6 28
+     A            SFLCAP      3S 0O     6 42
+     A            SFLSTAT      1A  O     6 50
+
+*-----------------------------------------------------------------
+* Subfile Control Record (Load All)
+*-----------------------------------------------------------------
+     A          R CABCTL                SFLCTL(CABSFL)
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(15)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 20'ADMIN - UPDATE CAB PROFILE'
+     A                                  4  2'Opt CabID  Cab No     Type        Cap  Status'
+     A                                 23  2'2=Change   F3=Exit   F12=Back'
+
+*-----------------------------------------------------------------
+* Update Cab Window
+*-----------------------------------------------------------------
+     A          R UPCABW
+     A                                      WINDOW(5 18 12 45)
+     A                                      OVERLAY
+
+     A                                  1  8'UPDATE CAB DETAILS'
+
+     A                                  3  2'Cab ID   :'
+     A            DSPCABID     5S 0O     3 18
+
+     A                                  4  2'Cab No   :'
+     A            DSPCABNO    10A  B     4 18
+
+     A                                  5  2'Cab Type :'
+     A            DSPTYPE     10A  B     5 18
+
+     A                                  6  2'Capacity :'
+     A            DSPCAP       3S 0B     6 18
+
+     A                                  7  2'S t a t u s:'
+     A            DSPSTAT      1A  B     7 18
+
+     A                                 10  2'Enter=Save   F12=Cancel'
+
