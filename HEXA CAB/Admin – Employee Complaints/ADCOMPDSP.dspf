@@ -1,0 +1,32 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R COMPSFL               SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLCMPID     6S 0O     6  6
+     A            SFLEMPID     6S 0O     6 14
+     A            SFLCABID     5S 0O     6 22
+     A            SFLDESC    40A  O     6 29
+     A            SFLSTAT    10A  O     6 71
+
+*-----------------------------------------------------------------
+* Subfile Control Record (Load All)
+*-----------------------------------------------------------------
+     A          R COMPCTL               SFLCTL(COMPSFL)
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(15)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 22'ADMIN - EMPLOYEE COMPLAINTS'
+     A                                  4  2'Opt CompID EmpID CabID Description                            Status'
+     A                                 23  2'5=Close   F3=Exit   F12=Back'
+
