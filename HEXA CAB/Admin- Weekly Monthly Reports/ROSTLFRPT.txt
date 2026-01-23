@@ -1,0 +1,2 @@
+     A          R ROSTREC               PFILE(ROSTERPF)
+     A          K ROSTDT

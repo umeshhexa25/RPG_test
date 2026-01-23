@@ -1,0 +1,36 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Report Selection Screen
+*-----------------------------------------------------------------
+     A          R RPTSEL
+     A                                  1 22'ADMIN - WEEKLY / MONTHLY REPORTS'
+
+     A                                  4  5'Re p o r t  T y p e (W/M):'
+     A            DSPTYPE      1A  B     4 40
+
+     A                                  5  5'From Date (YYYYMMDD):'
+     A            DSPFROM      8S 0B     5 40
+
+     A                                  6  5'T o   D a t e (YYYYMMDD):'
+     A            DSPTO        8S 0B     6 40
+
+*-----------------------------------------------------------------
+* Report Output
+*-----------------------------------------------------------------
+     A                                  9  5'T o t a l  T r i p s      :'
+     A            DSPTRIP      5S 0O     9 40
+
+     A                                 10  5'E m p l o y e e s  S e r v e d:'
+     A            DSPEMP       5S 0O    10 40
+
+     A                                 11  5'T o t a l  C o m p l a i n t s:'
+     A            DSPCOMP      5S 0O    11 40
+
+     A                                 12  5'C l o s e d  C o m p l a i n t s:'
+     A            DSPCLSD      5S 0O    12 40
+
+     A                                 22  2'F3=Exit   F12=Back'
