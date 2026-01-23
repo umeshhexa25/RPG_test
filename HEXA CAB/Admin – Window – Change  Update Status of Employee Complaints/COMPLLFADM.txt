@@ -1,0 +1,2 @@
+     A          R COMPREC               PFILE(COMPLPF)
+     A          K COMPID
