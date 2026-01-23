@@ -1,1 +1,3 @@
-
+     A          R LOGINREC               PFILE(LOGINPF)
+     A          K USERID
+     A          S USERTYPE               COMP(EQ 'MANAGER')
