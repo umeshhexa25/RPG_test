@@ -1,0 +1,21 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+
+*-----------------------------------------------------------------
+* Manager Home Screen
+*-----------------------------------------------------------------
+     A          R MGRHOME
+     A                                  1 25'HEXA CAB TRANSPORT'
+     A                                  2 30'MANAGER HOME SCREEN'
+
+     A                                  5 10'1. View Roster'
+     A                                  6 10'2. View Employee Complaints'
+     A                                  7 10'3. Approve / Review Roster'
+     A                                  8 10'4. Weekly / Monthly Reports'
+     A                                  9 10'5. Logout'
+
+     A                                 13 10'Enter Option :'
+     A            DSPOPT       1A  B    13 25
+
+     A                                 22  2'F3=Exit'
