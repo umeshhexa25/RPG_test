@@ -1,1 +1,33 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Complaint Update Window
+*-----------------------------------------------------------------
+     A          R COMPUPW
+     A                                      WINDOW(5 10 12 60)
+     A                                      OVERLAY
+
+     A                                  1 15'UPDATE COMPLAINT STATUS'
+
+     A                                  3  2'Complaint ID :'
+     A            DSPCMPID     6S 0O     3 20
+
+     A                                  4  2'Employee ID  :'
+     A            DSPEMPID     6S 0O     4 20
+
+     A                                  5  2'Cab ID       :'
+     A            DSPCABID     5S 0O     5 20
+
+     A                                  6  2'D e s c r i p t i o n:'
+     A            DSPDESC     40A  O     6 20
+
+     A                                  8  2'S t a t u s  :'
+     A            DSPSTAT     12A  B     8 20
+
+     A                                  9  2'Admin Remarks:'
+     A            DSPREMK     50A  B     9 20
+
+     A                                 12  2'Enter=Save   F12=Cancel'
 
