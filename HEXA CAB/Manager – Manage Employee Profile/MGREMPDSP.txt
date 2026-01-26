@@ -1,0 +1,30 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R EMPSFL                SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLEMPID     6S 0O     6  6
+     A            SFLNAME     30A  O     6 14
+     A            SFLPHN      10A  O     6 46
+     A            SFLSTAT      1A  O     6 60
+
+*-----------------------------------------------------------------
+* Subfile Control Record (Load All)
+*-----------------------------------------------------------------
+     A          R EMPCTL                SFLCTL(EMPSFL)
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(15)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 22'MANAGER - MANAGE EMPLOYEE PROFILE'
+     A                                  4  2'Opt EmpID  Name                           Phone      Status'
+     A                                 23  2'2=View/Update   F3=Exit   F12=Back'
