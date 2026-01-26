@@ -1,1 +1,18 @@
+<Employees>
+    <Employee>
+        <EmpId>1001</EmpId>
+        <Name>Rahul Patil</Name>
+        <Address>Pune</Address>
+        <Phone>9876543210</Phone>
+        <Status>Y</Status>
+    </Employee>
+
+    <Employee>
+        <EmpId>1002</EmpId>
+        <Name>Anita Deshmukh</Name>
+        <Address>Mumbai</Address>
+        <Phone>9123456780</Phone>
+        <Status>Y</Status>
+    </Employee>
+</Employees>
 
