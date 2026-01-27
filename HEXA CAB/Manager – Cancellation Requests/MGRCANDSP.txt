@@ -1,0 +1,31 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R CANSFL                SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLCANID     7S 0O     6  6
+     A            SFLEMPID     6S 0O     6 15
+     A            SFLCABID    5S 0O     6 23
+     A            SFLREASN   20A  O     6 31
+     A            SFLSTAT     1A  O     6 55
+
+*-----------------------------------------------------------------
+* Subfile Control (Single Page)
+*-----------------------------------------------------------------
+     A          R CANCTL                SFLCTL(CANSFL)
+     A                                      SFLSIZ(12)
+     A                                      SFLPAG(12)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 20'MANAGER - CANCELLATION REQUESTS'
+     A                                  4  2'Opt CanID  EmpID  CabID  Reason              St'
+     A                                 23  2'5=View   F3=Exit   F12=Back'
