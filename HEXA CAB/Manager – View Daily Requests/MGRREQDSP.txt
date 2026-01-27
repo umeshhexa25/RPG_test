@@ -1,0 +1,34 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R REQSFL                SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLREQID     7S 0O     6  6
+     A            SFLEMPID     6S 0O     6 15
+     A            SFLREQTM     5A  O     6 23
+     A            SFLPICK      20A O     6 31
+     A            SFLDROP      20A O     6 53
+
+*-----------------------------------------------------------------
+* Subfile Control (Single Page)
+*-----------------------------------------------------------------
+     A          R REQCTL                SFLCTL(REQSFL)
+     A                                      SFLSIZ(12)
+     A                                      SFLPAG(12)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 20'MANAGER - DAILY CAB REQUESTS'
+     A                                  2  2'Business Date:'
+     A            DSPDATE      8A  O     2 18
+
+     A                                  4  2'Opt ReqID  EmpID  Time  Pickup Location      Drop Location'
+     A                                 23  2'5=View   F3=Exit   F12=Back'

@@ -1,0 +1,3 @@
+     A          R REQREC                 PFILE(ADHOCREQ)
+     A          K REQDATE
+     A          K REQID
