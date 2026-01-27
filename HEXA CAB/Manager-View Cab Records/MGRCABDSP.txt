@@ -1,0 +1,31 @@
+A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R CABSFL                SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLCABID     5S 0O     6  6
+     A            SFLCABNO    10A  O     6 14
+     A            SFLMODEL   20A  O     6 26
+     A            SFLDRVID    6S 0O     6 48
+     A            SFLSTAT     1A  O     6 58
+
+*-----------------------------------------------------------------
+* Subfile Control (Single Page)
+*-----------------------------------------------------------------
+     A          R CABCTL                SFLCTL(CABSFL)
+     A                                      SFLSIZ(10)
+     A                                      SFLPAG(10)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 24'MANAGER - VIEW CAB RECORDS'
+     A                                  4  2'Opt CabID Cab No     Model                DrvID  St'
+     A                                 23  2'5=View   F3=Exit   F12=Back'

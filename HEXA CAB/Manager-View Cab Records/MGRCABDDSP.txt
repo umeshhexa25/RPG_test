@@ -1,0 +1,21 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA12(12)
+
+     A          R CABDTLW
+     A                                      WINDOW(6 20 10 40)
+     A                                      OVERLAY
+
+     A                                  1 10'CAB DETAILS'
+     A                                  3  2'Cab ID    :'
+     A            DSP_CABID     5S 0O     3 18
+     A                                  4  2'Cab No    :'
+     A            DSP_CABNO    10A  O     4 18
+     A                                  5  2'Model     :'
+     A            DSP_MODEL   20A  O     5 18
+     A                                  6  2'Driver ID :'
+     A            DSP_DRV      6S 0O     6 18
+     A                                  7  2'S t a t u s:'
+     A            DSP_STAT     1A  O     7 18
+
+     A                                  9  2'F12=Back'
