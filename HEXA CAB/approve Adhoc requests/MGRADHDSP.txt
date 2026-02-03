@@ -1,0 +1,33 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Subfile Record
+*-----------------------------------------------------------------
+     A          R ADHSFL                SFL
+     A            SFLSEL       1A  B     6  2
+     A            SFLREQID     7S 0O     6  6
+     A            SFLEMPID     6S 0O     6 15
+     A            SFLDATE      8A  O     6 23
+     A            SFLTIME      5A  O     6 32
+     A            SFLPICK     20A  O     6 40
+     A            SFLDROP     20A  O     6 62
+
+*-----------------------------------------------------------------
+* Subfile Control (Load All)
+*-----------------------------------------------------------------
+     A          R ADHCTL                SFLCTL(ADHSFL)
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(12)
+     A                                      SFLDSP
+     A                                      SFLDSPCTL
+     A                                      OVERLAY
+     A                                      CA03(03)
+     A                                      CA12(12)
+
+     A                                  1 18'MANAGER - APPROVE ADHOC REQUESTS'
+     A                                  4  2'Opt ReqID  EmpID  Date      Time  Pickup Location      Drop Location'
+     A                                 23  2'A=Approve  R=Reject  F3=Exit  F12=Back'
+
