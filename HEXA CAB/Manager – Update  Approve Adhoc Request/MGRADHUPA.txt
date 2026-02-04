@@ -1,0 +1,80 @@
+     H DFTACTGRP(*NO)
+     H ACTGRP(*CALLER)
+     H OPTION(*NODEBUGIO)
+     H COMMIT(*CHG)
+
+*------------------------------------------------------------------
+* Files
+*------------------------------------------------------------------
+     FMGRADHUPD CF   E             WORKSTN
+     FADHREQLFUP UF  E           K DISK
+
+*------------------------------------------------------------------
+* Parameters (Request ID passed from caller)
+*------------------------------------------------------------------
+     D MGRADHUPA      PI
+     D  PREQID                      7P 0
+
+*------------------------------------------------------------------
+* Work Fields
+*------------------------------------------------------------------
+     D VALID           S              1A
+
+*------------------------------------------------------------------
+* Fetch Request
+*------------------------------------------------------------------
+     C                   CHAIN     PREQID        ADHREC
+     C                   IF        %NOTFOUND
+     C                   RETURN
+     C                   ENDIF
+
+*------------------------------------------------------------------
+* Load Display Fields
+*------------------------------------------------------------------
+     C                   EVAL      DSP_REQID = REQID
+     C                   EVAL      DSP_EMP   = EMPID
+     C                   EVAL      DSP_DATE  = REQDATE
+     C                   EVAL      DSP_TIME  = REQTIME
+     C                   EVAL      DSP_PICK  = PICKUP
+     C                   EVAL      DSP_DROP  = DROPLOC
+     C                   EVAL      DSP_STAT  = STATUS
+
+*------------------------------------------------------------------
+* Display Window Loop
+*------------------------------------------------------------------
+     C                   DOW       *IN12 = *OFF
+
+     C                   EXFMT     ADHUPDW
+
+     C                   IF        *IN12 = *ON
+     C                   ROLBK
+     C                   RETURN
+     C                   ENDIF
+
+*------------------------------------------------------------------
+* Validation
+*------------------------------------------------------------------
+     C                   IF        DSP_STAT = 'A'
+     C                   OR        DSP_STAT = 'R'
+     C                   EVAL      VALID = 'Y'
+     C                   ELSE
+     C                   EVAL      VALID = 'N'
+     C                   ENDIF
+
+*------------------------------------------------------------------
+* Update + Commit
+*------------------------------------------------------------------
+     C                   IF        VALID = 'Y'
+     C                   EVAL      STATUS = DSP_STAT
+     C                   UPDATE    ADHREC
+     C                   COMMIT
+     C                   LEAVE
+     C                   ENDIF
+
+     C                   ENDDO
+
+*------------------------------------------------------------------
+* End Program
+*------------------------------------------------------------------
+     C                   SETON                                        LR
+     C                   RETURN

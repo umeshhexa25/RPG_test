@@ -1,0 +1,36 @@
+     A                                      DSPSIZ(24 80)
+     A                                      INDARA
+     A                                      CA12(12)
+
+*-----------------------------------------------------------------
+* Update / Approve Adhoc Request Window
+*-----------------------------------------------------------------
+     A          R ADHUPDW
+     A                                      WINDOW(4 15 15 50)
+     A                                      OVERLAY
+
+     A                                  1 10'APPROVE ADHOC REQUEST'
+
+     A                                  3  2'Requst ID   :'
+     A            DSP_REQID     7S 0O     3 20
+
+     A                                  4  2'Employee ID :'
+     A            DSP_EMP       6S 0O     4 20
+
+     A                                  5  2'D a t e     :'
+     A            DSP_DATE      8A  O     5 20
+
+     A                                  6  2'T i m e     :'
+     A            DSP_TIME      5A  O     6 20
+
+     A                                  7  2'Pickup      :'
+     A            DSP_PICK     30A  O     7 20
+
+     A                                  8  2'Drop        :'
+     A            DSP_DROP     30A  O     8 20
+
+     A                                  9  2'S t a t u s :'
+     A            DSP_STAT      1A  B     9 20
+
+     A                                 12  2'A=Approve  R=Reject'
+     A                                 13  2'Enter=Save   F12=Cancel'
