@@ -1,0 +1,7 @@
+     D EMPDQDS         DS                  256
+     D  DQ_EMPID              1      6
+     D  DQ_NAME               7     36
+     D  DQ_DEPT              37     66
+     D  DQ_EMAIL             67     96
+     D  DQ_PHONE             97    106
+     D  DQ_STATUS           107    107

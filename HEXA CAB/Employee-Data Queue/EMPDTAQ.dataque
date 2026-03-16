@@ -1,0 +1,4 @@
+CRTDTAQ DTAQ(HEXACAB/EMPDTAQ) +
+        MAXLEN(256) +
+        SEQ(*FIFO) +
+        TEXT('Employee inbound data queue')
