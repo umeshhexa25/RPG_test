@@ -1,0 +1,17 @@
+     A          R RPTHEAD SKIPB(1)
+     A                                  1 20'HEXA CAB SERVICES'
+     A                                  2 15'Daily Cab Request Report'
+     A                                  3  1'Date:'
+     A            RPTDATE       10A      3  7
+     A                                  5  1'EmpID'
+     A                                 5 10'Employee Name'
+     A                                 5 35'Cab No'
+     A                                 5 50'Pickup Time'
+     A                                 5 65'Status'
+
+     A          R RPTDTL
+     A            EMPID          6P 0    7  1
+     A            EMPNAME       30A      7 10
+     A            CABNO         10A      7 35
+     A            PICKTIME       8A      7 50
+     A            STATUS        10A      7 65
